@@ -5,23 +5,23 @@ VisualStudioVersion = 15.0.26124.0
 MinimumVisualStudioVersion = 15.0.26124.0
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.CLI", "Source\DecoR8R.CLI\DecoR8R.CLI.csproj", "{5576D016-267A-4822-8AE9-61BD531F5112}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.CLI.Test", "DecoR8R.CLI.Test\DecoR8R.CLI.Test.csproj", "{1D523758-0963-414C-97BF-C48A8B1EC376}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.CLI.Test", "Test\DecoR8R.CLI.Test\DecoR8R.CLI.Test.csproj", "{1D523758-0963-414C-97BF-C48A8B1EC376}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Configuration", "Source\DecoR8R.Configuration\DecoR8R.Configuration.csproj", "{CEF5B0D4-9669-4B6B-AA23-20456740438D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Configuration.Test", "DecoR8R.Configuration.Test\DecoR8R.Configuration.Test.csproj", "{E2E9073F-C9FB-42BE-A72C-0902D21DB4C1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Configuration.Test", "Test\DecoR8R.Configuration.Test\DecoR8R.Configuration.Test.csproj", "{E2E9073F-C9FB-42BE-A72C-0902D21DB4C1}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Shell", "Source\DecoR8R.Shell\DecoR8R.Shell.csproj", "{F431630F-2D52-45C8-8DB5-3D2EE87F436F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Shell.Test", "DecoR8R.Shell.Test\DecoR8R.Shell.Test.csproj", "{D3ADBF6A-C3A1-40AA-A359-EBC5707916DA}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.Shell.Test", "Test\DecoR8R.Shell.Test\DecoR8R.Shell.Test.csproj", "{D3ADBF6A-C3A1-40AA-A359-EBC5707916DA}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.NeoVim", "Source\DecoR8R.NeoVim\DecoR8R.NeoVim.csproj", "{3833137A-8FED-46BD-84D8-645ED57CC0D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.NeoVim.Test", "DecoR8R.NeoVim.Test\DecoR8R.NeoVim.Test.csproj", "{54408E85-12BD-4BB9-9100-52570F7DA402}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.NeoVim.Test", "Test\DecoR8R.NeoVim.Test\DecoR8R.NeoVim.Test.csproj", "{54408E85-12BD-4BB9-9100-52570F7DA402}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.TMux", "Source\DecoR8R.TMux\DecoR8R.TMux.csproj", "{DAF36E16-5EC7-435F-A92D-BF0569CEC1B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.TMux.Test", "DecoR8R.TMux.Test\DecoR8R.TMux.Test.csproj", "{5C948426-503E-467D-A015-C7054F70CC64}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecoR8R.TMux.Test", "Test\DecoR8R.TMux.Test\DecoR8R.TMux.Test.csproj", "{5C948426-503E-467D-A015-C7054F70CC64}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
