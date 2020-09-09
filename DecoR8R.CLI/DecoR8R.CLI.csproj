@@ -12,4 +12,8 @@
     <ProjectReference Include="..\DecoR8R.NeoVim\DecoR8R.NeoVim.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta1.20427.1" />
+  </ItemGroup>
+
 </Project>
