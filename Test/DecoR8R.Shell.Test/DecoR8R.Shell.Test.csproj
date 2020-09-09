@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DecoR8R.NeoVim\DecoR8R.NeoVim.csproj" />
+    <ProjectReference Include="../../Source/DecoR8R.Shell/DecoR8R.Shell.csproj" />
   </ItemGroup>
 
 </Project>

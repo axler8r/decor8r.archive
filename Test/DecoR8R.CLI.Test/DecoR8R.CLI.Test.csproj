@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DecoR8R.CLI\DecoR8R.CLI.csproj" />
+    <ProjectReference Include="../../Source/DecoR8R.CLI/DecoR8R.CLI.csproj" />
   </ItemGroup>
 
 </Project>
