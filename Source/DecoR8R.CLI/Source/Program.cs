@@ -67,9 +67,10 @@ namespace DecoR8R.CLI
 
         private enum Shell
         {
-            ZSH,
             Bash,
             Fish,
+            PowerShell,
+            ZSH,
         }
 
         private static Command CreateDecorateCommand()
