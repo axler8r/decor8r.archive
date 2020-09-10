@@ -88,10 +88,16 @@ namespace DecoR8R.CLI
             var decorateTMuxCommand = new Command(
                 "tmux",
                 description: "Decorate tmux status line(s)");
+            decorateTMuxCommand.Handler = CommandHandler.Create(
+                () => {}
+            );
             
             var decorateNeovimCommand = new Command(
                 "nvim",
                 description: "Decorate Neovim status line(s)");
+            decorateNeovimCommand.Handler = CommandHandler.Create(
+                () => {}
+            );
             
             var decorateCommand = new Command(
                 "decorate",
