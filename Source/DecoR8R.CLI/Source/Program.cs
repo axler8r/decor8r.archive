@@ -1,7 +1,9 @@
 ﻿using System;
 using System.CommandLine;
+using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DecoR8R.CLI
@@ -78,11 +80,33 @@ namespace DecoR8R.CLI
             var decorateShellCommand = new Command(
                 "shell",
                 description: "Decorate command terminals") {
-                new Argument<Shell>("shell"),
+                    new Option<int>(
+                        new string[] {"-w", "--width"},
+                        description: "Width of the terminal"
+                    ),
+                    new Option<DirectoryInfo> (
+                        new string[] {"-c", "--current-working-directory"},
+                        description: "Directory to decorate"
+                    ).ExistingOnly(),
+                    new Argument<Shell>("shell"),
             };
-            decorateShellCommand.Handler = CommandHandler.Create<Shell>(
-                (shell) => {
+            decorateShellCommand.Handler = CommandHandler.Create<FileSystemInfo, int, Shell>(
+                (currentWorkingDirectory, width, shell) => {
+                    var _width = width == 0 ? Console.WindowWidth : width;
                     Console.WriteLine($"Decorating {shell}...");
+                    Console.WriteLine($"Decorating {currentWorkingDirectory}...");
+                    Console.WriteLine($"The width of the terminal is {_width}...");
+
+                    var _components = currentWorkingDirectory.FullName.
+                        Split(Path.DirectorySeparatorChar).
+                        Where(c => !String.IsNullOrEmpty(c));
+                    
+                    var _result = "";
+                    foreach (var _c in _components) {
+                        _result += _c;
+                        _result += "  ";
+                    }
+                    Console.WriteLine($"Result is {_result}...");
                 }
             );
 
