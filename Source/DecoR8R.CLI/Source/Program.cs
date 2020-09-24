@@ -1,17 +1,17 @@
 ﻿using System;
 using System.CommandLine;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
+using static System.Environment;
+
+
 namespace DecoR8R.CLI
 {
-    class Program
-    {
-        static async Task<int> Main(params string[] args)
-        {
+    class Program {
+        static async Task<int> Main(params string[] args) {
             var configureCommand = CreateConfigureCommand();
             var decorateCommand = CreateDecorateCommand();
             var root = new RootCommand("decor8r") {
@@ -24,24 +24,24 @@ namespace DecoR8R.CLI
 
         private static Command CreateConfigureCommand()
         {
+            var configDir_ = new DirectoryInfo(Path.Combine(
+                GetFolderPath(SpecialFolder.ApplicationData), "decor8r"));
+
             var configureInitCommand = new Command(
                 "init",
                 description: "Initialize decor8r") {
-                new Option<DirectoryInfo>(
-                    new string[] {"-d", "--directory"},
-                    description: "Custom configuration directory"
-                ).ExistingOnly(),
-                new Option<FileInfo>(
-                    new string[] {"-i", "--import"},
-                    description: "Import existing configuration file"
-                ).ExistingOnly(),
+                new Argument<DirectoryInfo>("directory", GetDefaultConfigurationDirectory(configDir_)) {
+                    Name = "DIR",
+                    Description = "Initialization directory",
+                    Arity = ArgumentArity.ZeroOrOne
+                }
             };
             configureInitCommand.AddAlias("initialize");
             configureInitCommand.Handler = CommandHandler.Create<FileSystemInfo, FileSystemInfo>(
-                (directory, import) =>
+                (dir, import) =>
                 {
                     Console.WriteLine("In init command hadler...");
-                    Console.WriteLine($"DirectoryInfo is {directory}...");
+                    Console.WriteLine($"DirectoryInfo is {dir}...");
                     Console.WriteLine($"FileInfo is {import}...");
                 }
             );
@@ -67,16 +67,23 @@ namespace DecoR8R.CLI
             return configureCommand;
         }
 
-        private enum Shell
-        {
+        private static Func<DirectoryInfo> GetDefaultConfigurationDirectory(DirectoryInfo dir) {
+            return () => {
+                if (!dir.Exists) {
+                    dir.Create();
+                }
+                return dir;
+            };
+        }
+
+        private enum Shell {
             Bash,
             Fish,
             PowerShell,
             ZSH,
         }
 
-        private static Command CreateDecorateCommand()
-        {
+        private static Command CreateDecorateCommand() {
             var decorateShellCommand = new Command(
                 "shell",
                 description: "Decorate command terminals") {
@@ -134,5 +141,5 @@ namespace DecoR8R.CLI
 
             return decorateCommand;
         }
-   }
+    }
 }
