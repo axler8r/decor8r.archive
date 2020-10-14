@@ -10,13 +10,16 @@ using static System.Environment;
 
 namespace DecoR8R.CLI
 {
-    class Program {
-        static async Task<int> Main(params string[] args) {
+    class Program
+    {
+        static async Task<int> Main(params string[] args)
+        {
             var configureCommand = CreateConfigureCommand();
             var decorateCommand = CreateDecorateCommand();
-            var root = new RootCommand("decor8r") {
-                configureCommand,
-                decorateCommand
+            var root = new RootCommand("decor8r")
+            {
+                CreateConfigureCommand(),
+                CreateDecorateCommand()
             };
 
             return await root.InvokeAsync(args);
@@ -27,9 +30,8 @@ namespace DecoR8R.CLI
             var configDir_ = new DirectoryInfo(Path.Combine(
                 GetFolderPath(SpecialFolder.ApplicationData), "decor8r"));
 
-            var configureInitCommand = new Command(
-                "init",
-                description: "Initialize decor8r") {
+            var configureInitCommand = new Command("init", description: "Initialize decor8r")
+            {
                 new Argument<DirectoryInfo>("directory", GetDefaultConfigurationDirectory(configDir_)) {
                     Name = "DIR",
                     Description = "Initialization directory",
@@ -46,9 +48,8 @@ namespace DecoR8R.CLI
                 }
             );
 
-            var configureCommand = new Command(
-                "config",
-                description: "Configure decor8r") {
+            var configureCommand = new Command("config", description: "Configure decor8r")
+            {
                 new Option<bool>(
                     new string[] {"-s", "--show"},
                     description: "Show the current configuration"
@@ -67,38 +68,45 @@ namespace DecoR8R.CLI
             return configureCommand;
         }
 
-        private static Func<DirectoryInfo> GetDefaultConfigurationDirectory(DirectoryInfo dir) {
-            return () => {
-                if (!dir.Exists) {
+        private static Func<DirectoryInfo> GetDefaultConfigurationDirectory(DirectoryInfo dir)
+        {
+            return () =>
+            {
+                if (!dir.Exists)
+                {
                     dir.Create();
                 }
                 return dir;
             };
         }
 
-        private enum Shell {
+        private enum Shell
+        {
             Bash,
             Fish,
             PowerShell,
             ZSH,
         }
 
-        private static Command CreateDecorateCommand() {
+        private static Command CreateDecorateCommand()
+        {
             var decorateShellCommand = new Command(
                 "shell",
-                description: "Decorate command terminals") {
-                    new Option<int>(
-                        new string[] {"-w", "--width"},
-                        description: "Width of the terminal"
-                    ),
-                    new Option<DirectoryInfo> (
-                        new string[] {"-c", "--current-working-directory"},
-                        description: "Directory to decorate"
-                    ).ExistingOnly(),
-                    new Argument<Shell>("shell"),
+                description: "Decorate command terminals")
+            {
+                new Option<int>(
+                    new string[] {"-w", "--width"},
+                    description: "Width of the terminal"
+                ),
+                new Option<DirectoryInfo> (
+                    new string[] {"-c", "--current-working-directory"},
+                    description: "Directory to decorate"
+                ).ExistingOnly(),
+                new Argument<Shell>("shell"),
             };
             decorateShellCommand.Handler = CommandHandler.Create<FileSystemInfo, int, Shell>(
-                (currentWorkingDirectory, width, shell) => {
+                (currentWorkingDirectory, width, shell) =>
+                {
                     var _width = width == 0 ? Console.WindowWidth : width;
                     Console.WriteLine($"Decorating {shell}...");
                     Console.WriteLine($"Decorating {currentWorkingDirectory}...");
@@ -107,9 +115,10 @@ namespace DecoR8R.CLI
                     var _components = currentWorkingDirectory.FullName.
                         Split(Path.DirectorySeparatorChar).
                         Where(c => !String.IsNullOrEmpty(c));
-                    
+
                     var _result = "";
-                    foreach (var _c in _components) {
+                    foreach (var _c in _components)
+                    {
                         _result += _c;
                         _result += "  ";
                     }
@@ -120,20 +129,15 @@ namespace DecoR8R.CLI
             var decorateTMuxCommand = new Command(
                 "tmux",
                 description: "Decorate tmux status line(s)");
-            decorateTMuxCommand.Handler = CommandHandler.Create(
-                () => {}
-            );
-            
+            decorateTMuxCommand.Handler = CommandHandler.Create(() => { });
+
             var decorateNeovimCommand = new Command(
                 "nvim",
                 description: "Decorate Neovim status line(s)");
-            decorateNeovimCommand.Handler = CommandHandler.Create(
-                () => {}
-            );
-            
-            var decorateCommand = new Command(
-                "decorate",
-                description: "Decorate the specified prompt or status area") {
+            decorateNeovimCommand.Handler = CommandHandler.Create(() => { });
+
+            var decorateCommand = new Command("decorate", description: "Decorate the specified prompt or status area")
+            {
                 decorateShellCommand,
                 decorateTMuxCommand,
                 decorateNeovimCommand
