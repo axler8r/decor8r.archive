@@ -5,11 +5,9 @@ It is opinionated. It does not try to cover all tools or environements.
 
 
 ## Goals
-* Single executable
-* Easy to use
-* Fast enough
-* Excellent documentation
-* Popular themes
+* Sensible defaults
+* Intuitive
+* Themes
 
 
 ## Responsibility
