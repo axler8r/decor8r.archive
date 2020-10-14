@@ -14,6 +14,8 @@ Usage:
     decor8r decorate nvim [neovim_options]
 
 Shell Options:
+    -w, --width             Terminal width.
+    -d, --directory=<dir>   Directory to decorate [default: ${PWD}].
 
 Tmux Options:
 
