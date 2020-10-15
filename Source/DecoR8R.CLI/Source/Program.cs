@@ -16,64 +16,62 @@ namespace DecoR8R.CLI
         {
             var root = new RootCommand("decor8r")
             {
-                CreateDecorateCommand()
+                CreateDecorateCommands()
             };
 
             return await root.InvokeAsync(args);
         }
 
+        private static Command CreateDecorateCommands()
+        {
+            var result_ = new Command(
+                name: "decorate",
+                description: "Decorate shell, tmux or Neovim");
+            result_.AddAlias("d");
+            result_.AddCommand(CreateDecorateShellCommand());
+
+            return result_;
+        }
+
         private enum Shell
         {
             Bash,
-            Fish,
             PowerShell,
             ZSH,
         }
 
-        private static Command CreateDecorateCommand()
+        private static Command CreateDecorateShellCommand()
         {
-            var decorateShellCommand = new Command(
-                "shell",
-                description: "Decorate command terminals")
-            {
-                new Option<int>(
-                    new string[] {"-w", "--width"},
-                    description: "Width of the terminal"
-                ),
-                new Option<DirectoryInfo> (
-                    new string[] {"-c", "--current-working-directory"},
-                    description: "Directory to decorate"
-                ).ExistingOnly(),
-                new Argument<Shell>("shell"),
-            };
-            decorateShellCommand.Handler = CommandHandler.Create<FileSystemInfo, int, Shell>(
-                (currentWorkingDirectory, width, shell) =>
-                {
-                    var _width = width == 0 ? Console.WindowWidth : width;
-                    Console.WriteLine($"Decorating {shell}...");
-                    Console.WriteLine($"Decorating {currentWorkingDirectory}...");
-                    Console.WriteLine($"The width of the terminal is {_width}...");
-
-                    var _components = currentWorkingDirectory.FullName.
-                        Split(Path.DirectorySeparatorChar).
-                        Where(c => !String.IsNullOrEmpty(c));
-
-                    var _result = "";
-                    foreach (var _c in _components)
-                    {
-                        _result += _c;
-                        _result += "  ";
-                    }
-                    Console.WriteLine($"Result is {_result}...");
-                }
+            var result_ = new Command(
+                name: "shell",
+                description: "Decorate command prompt"
             );
 
-            var decorateCommand = new Command("decorate", description: "Decorate the specified prompt or status area")
-            {
-                decorateShellCommand,
-            };
+            var shell_ = new Argument<Shell>(
+                name: "shell",
+                description: "Target shell"
+            );
+            result_.AddArgument(shell_);
 
-            return decorateCommand;
+            var path_ = new Argument<FileSystemInfo>(
+                name: "path",
+                description: "Path to decorate"
+            );
+            result_.AddArgument(path_);
+
+            result_.Handler = CommandHandler.Create<Shell, DirectoryInfo> (HandleShellDecoration);
+
+            return result_;
         }
+
+        private static void HandleShellDecoration(Shell shell, DirectoryInfo path)
+        {
+            Console.Out.WriteLine(shell);
+            Console.Out.WriteLine(path);
+        }
+    }
+
+    class DecorateCommandBuilder
+    {
     }
 }
