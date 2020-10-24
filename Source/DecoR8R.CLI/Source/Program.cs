@@ -1,107 +1,34 @@
-﻿using System;
-using System.CommandLine;
-using System.CommandLine.Invocation;
-using System.IO;
+﻿using System.CommandLine;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Logging;
+
 
 namespace DecoR8R.CLI
 {
     class Program
     {
+        private static readonly ILogger<Program> _logger;
+
         static async Task<int> Main(params string[] args)
         {
-            var configureCommand = CreateConfigureCommand();
-            var decorateCommand = CreateDecorateCommand();
-            var root = new RootCommand("decor8r") {
-                configureCommand,
-                decorateCommand
+            var root_ = new RootCommand("decor8r")
+            {
+                CreateDecorateCommands()
             };
 
-            return await root.InvokeAsync(args);
+            return await root_.InvokeAsync(args);
         }
 
-        private static Command CreateConfigureCommand()
+        private static Command CreateDecorateCommands()
         {
-            var configureInitCommand = new Command(
-                "init",
-                description: "Initialize decor8r") {
-                new Option<DirectoryInfo>(
-                    new string[] {"-d", "--directory"},
-                    description: "Custom configuration directory"
-                ).ExistingOnly(),
-                new Option<FileInfo>(
-                    new string[] {"-i", "--import"},
-                    description: "Import existing configuration file"
-                ).ExistingOnly(),
-            };
-            configureInitCommand.AddAlias("initialize");
-            configureInitCommand.Handler = CommandHandler.Create<FileSystemInfo, FileSystemInfo>(
-                (directory, import) =>
-                {
-                    Console.WriteLine("In init command hadler...");
-                    Console.WriteLine($"DirectoryInfo is {directory}...");
-                    Console.WriteLine($"FileInfo is {import}...");
-                }
-            );
+            _logger.LogTrace("Createing decorate commands...");
 
-            var configureCommand = new Command(
-                "config",
-                description: "Configure decor8r") {
-                new Option<bool>(
-                    new string[] {"-s", "--show"},
-                    description: "Show the current configuration"
-                ),
-                configureInitCommand,
-            };
-            configureCommand.AddAlias("configure");
-            configureCommand.Handler = CommandHandler.Create<bool>(
-                (show) =>
-                {
-                    Console.WriteLine("In configure command handler...");
-                    Console.WriteLine($"Show is {show}...");
-                }
-            );
+            var result_ = new Command(
+                name: "decorate",
+                description: "Decorate shell, tmux or Neovim");
+            result_.AddCommand(Terminal.Factory.CreateCommand());
 
-            return configureCommand;
+            return result_;
         }
-
-        private enum Shell
-        {
-            ZSH,
-            Bash,
-            Fish,
-        }
-
-        private static Command CreateDecorateCommand()
-        {
-            var decorateShellCommand = new Command(
-                "shell",
-                description: "Decorate command terminals") {
-                new Argument<Shell>("shell"),
-            };
-            decorateShellCommand.Handler = CommandHandler.Create<Shell>(
-                (shell) => {
-                    Console.WriteLine($"Decorating {shell}...");
-                }
-            );
-
-            var decorateTMuxCommand = new Command(
-                "tmux",
-                description: "Decorate tmux status line(s)");
-            
-            var decorateNeovimCommand = new Command(
-                "nvim",
-                description: "Decorate Neovim status line(s)");
-            
-            var decorateCommand = new Command(
-                "decorate",
-                description: "Decorate the specified prompt or status area") {
-                decorateShellCommand,
-                decorateTMuxCommand,
-                decorateNeovimCommand
-            };
-
-            return decorateCommand;
-        }
-   }
+    }
 }
