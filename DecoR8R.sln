@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.30611.23
 MinimumVisualStudioVersion = 15.0.26124.0
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecoR8R.CLI", "DecoR8R.CLI\DecoR8R.CLI.csproj", "{5576D016-267A-4822-8AE9-61BD531F5112}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecoR8R.CLI", "Projects/DecoR8R.CLI/DecoR8R.CLI.csproj", "{5576D016-267A-4822-8AE9-61BD531F5112}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecoR8R.CLI.Test", "DecoR8R.CLI.Test\DecoR8R.CLI.Test.csproj", "{1D523758-0963-414C-97BF-C48A8B1EC376}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DecoR8R.CLI.Test", "Projects/DecoR8R.CLI.Test/DecoR8R.CLI.Test.csproj", "{1D523758-0963-414C-97BF-C48A8B1EC376}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
