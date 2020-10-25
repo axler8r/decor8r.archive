@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Source\DecoR8R\NeoVim\" />
+    <Folder Include="Source\DecoR8R\TMux\" />
+    <Folder Include="Source\DecoR8R\Terminal\" />
+    <Folder Include="Test\" />
   </ItemGroup>
 
   <ItemGroup>
