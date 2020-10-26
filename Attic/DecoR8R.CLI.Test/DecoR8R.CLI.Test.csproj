@@ -14,7 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../..\Source/DecoR8R.TMux/DecoR8R.TMux.csproj" />
+    <Folder Include="Test\" />
   </ItemGroup>
 
 </Project>

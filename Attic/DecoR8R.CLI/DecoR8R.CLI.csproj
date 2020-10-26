@@ -6,10 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DecoR8R.Configuration\DecoR8R.Configuration.csproj" />
-    <ProjectReference Include="..\DecoR8R.Shell\DecoR8R.Shell.csproj" />
-    <ProjectReference Include="..\DecoR8R.TMux\DecoR8R.TMux.csproj" />
-    <ProjectReference Include="..\DecoR8R.NeoVim\DecoR8R.NeoVim.csproj" />
+    <Folder Include="Source\DecoR8R\NeoVim\" />
+    <Folder Include="Source\DecoR8R\TMux\" />
+    <Folder Include="Source\DecoR8R\Terminal\" />
+    <Folder Include="Test\" />
   </ItemGroup>
 
   <ItemGroup>
