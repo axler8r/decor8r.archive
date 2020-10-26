@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace DecoR8R.Shell.Test
+namespace DecOR8R.CLI.Test
 {
     [TestClass]
     public class UnitTest1
