@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace DecOR8R.CLI
 {
