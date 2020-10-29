@@ -26,7 +26,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public ArgumentBuilder<T> SetArity(ArgumentArity arity)
+        public ArgumentBuilder<T> SetArity(IArgumentArity arity)
         {
             // TODO: Add checks for arguments
             __argument.Arity = arity;
@@ -59,7 +59,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public Argument Build()
+        public Argument<T> Build()
         {
             return __argument;
         }
