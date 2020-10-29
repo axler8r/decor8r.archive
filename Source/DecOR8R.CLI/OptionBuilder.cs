@@ -1,3 +1,4 @@
+using System;
 using System.CommandLine;
 
 namespace DecOR8R.CLI
@@ -11,19 +12,9 @@ namespace DecOR8R.CLI
             __option = new Option<T>(name);
         }
 
-        public OptionBuilder(string name, string description)
+        public OptionBuilder(string name, Func<T> defaultValue)
         {
-            __option = new Option<T>(name, description);
-        }
-
-        public OptionBuilder(string[] names)
-        {
-            __option = new Option<T>(names);
-        }
-
-        public OptionBuilder(string[] names, string description)
-        {
-            __option = new Option<T>(names, description);
+            __option = new Option<T>(name, defaultValue);
         }
 
         public OptionBuilder<T> SetDescription(string description)
@@ -54,7 +45,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public Option Build()
+        public Option<T> Build()
         {
             return __option;
         }
