@@ -1,16 +1,13 @@
-using System;
+using System.CommandLine;
+using System.CommandLine.Invocation;
 using System.IO;
 using System.Threading.Tasks;
 
-using System.CommandLine;
-using System.CommandLine.Invocation;
-
 namespace DecOR8R.CLI
 {
-    partial class Program
+    internal partial class Program
     {
-
-        static async Task<int> Main(params string[] args)
+        private static async Task<int> Main(params string[] args)
         {
             var decor8r_ = new RootCommand("decor8r")
             {
@@ -27,8 +24,8 @@ namespace DecOR8R.CLI
                             .SetDescription("Terminal width")
                             .AddAlias("-w")
                             .Build())
-                        .AddOption<Type>(
-                            new OptionBuilder<Type>("--type", () => Type.ANSI)
+                        .AddOption<TerminalType>(
+                            new OptionBuilder<TerminalType>("--type", () => TerminalType.ANSI)
                             .SetDescription("Type of terminal")
                             .AddAlias("-t")
                             .Build())
@@ -38,12 +35,11 @@ namespace DecOR8R.CLI
                             .SetArity(ArgumentArity.ExactlyOne)
                             .Build())
                         .SetHandler(
-                            CommandHandler.Create<DirectoryInfo, TerminalOptions>(
-                                (DirectoryInfo path, TerminalOptions options) =>
+                            CommandHandler.Create<DirectoryInfo, TerminalSepcification>(
+                                (DirectoryInfo path, TerminalSepcification termSpec) =>
                                 {
-                                    Console.WriteLine(path);
-                                    Console.WriteLine(options.Type);
-                                    Console.WriteLine(options.Width);
+                                    var terminalConfiguration_ = Configurator.GetTerminalDecorationConfiguration();
+                                    TerminalDecorator.Decorate(path, termSpec, terminalConfiguration_);
                                 }
                             )
                         )
@@ -54,8 +50,8 @@ namespace DecOR8R.CLI
                     .AddCommand(
                         new CommandBuilder("tmux")
                         .Build())
-                    .Build()
-        };
+                    .Build(),
+            };
 
             return await decor8r_.InvokeAsync(args);
         }

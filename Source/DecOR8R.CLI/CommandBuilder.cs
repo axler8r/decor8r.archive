@@ -7,13 +7,13 @@ namespace DecOR8R.CLI
     {
         private readonly Command __command;
 
-        public CommandBuilder(string name) 
+        public CommandBuilder(string name)
         {
             // TODO: Add checks for arguments
             __command = new Command(name);
         }
 
-        public CommandBuilder(string name, string description) 
+        public CommandBuilder(string name, string description)
         {
             // TODO: Add checks for arguments
             __command = new Command(name, description);
