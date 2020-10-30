@@ -1,21 +1,25 @@
 namespace DecOR8R.CLI
 {
-    public enum Type
+    public enum TerminalType
     {
         ANSI,
-        MonoChrome
+        MonoChrome,
     }
 
-    public class TerminalOptions
+    public class TerminalSepcification
     {
-        public TerminalOptions(int width, Type type)
+        public TerminalSepcification(int width, TerminalType type)
         {
-            Width = width;
-            Type = type;
+            this.Width = width;
+            this.Type = type;
         }
 
-        public Type Type { get; private set; }
+        public TerminalType Type { get; private set; }
 
         public int Width { get; private set; }
+    }
+
+    public class TerminalDecorationConfiguration
+    {
     }
 }
