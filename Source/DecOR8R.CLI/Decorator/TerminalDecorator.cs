@@ -2,11 +2,13 @@ using System;
 using System.IO;
 using System.Text;
 
+using System.CommandLine.Rendering;
+
 namespace DecOR8R.CLI
 {
     public static class TerminalDecorator
     {
-        public static void Decorate(
+        internal static void Decorate(
             DirectoryInfo path,
             TerminalSepcification termSpec,
             TerminalDecorationConfiguration configuration)
@@ -18,6 +20,7 @@ namespace DecOR8R.CLI
             {
                 builder_.Append(path_).Append(" > ");
             }
+
             Console.WriteLine(builder_.ToString());
         }
     }

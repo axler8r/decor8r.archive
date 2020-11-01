@@ -3,23 +3,23 @@ using System.CommandLine.Invocation;
 
 namespace DecOR8R.CLI
 {
-    public class CommandBuilder
+    internal class CommandBuilder
     {
-        private readonly Command __command;
+        readonly Command __command;
 
-        public CommandBuilder(string name)
+        internal CommandBuilder(string name)
         {
             // TODO: Add checks for arguments
             __command = new Command(name);
         }
 
-        public CommandBuilder(string name, string description)
+        internal CommandBuilder(string name, string description)
         {
             // TODO: Add checks for arguments
             __command = new Command(name, description);
         }
 
-        public CommandBuilder SetDescription(string description)
+        internal CommandBuilder SetDescription(string description)
         {
             // TODO: Add checks for arguments
             __command.Description = description;
@@ -27,7 +27,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public CommandBuilder SetHandler(ICommandHandler handler)
+        internal CommandBuilder SetHandler(ICommandHandler handler)
         {
             // TODO: Add checks for arguments
             __command.Handler = handler;
@@ -35,7 +35,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public CommandBuilder AddAlias(string alias)
+        internal CommandBuilder AddAlias(string alias)
         {
             // TODO: Add checks for arguments
             __command.AddAlias(alias);
@@ -43,7 +43,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public CommandBuilder AddArgument<T>(Argument<T> argument)
+        internal CommandBuilder AddArgument<T>(Argument<T> argument)
         {
             // TODO: Add checks for arguments
             __command.AddArgument(argument);
@@ -51,7 +51,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public CommandBuilder AddOption<T>(Option<T> option)
+        internal CommandBuilder AddOption<T>(Option<T> option)
         {
             // TODO: Add checks for arguments
             __command.AddOption(option);
@@ -59,7 +59,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public CommandBuilder AddCommand(Command command)
+        internal CommandBuilder AddCommand(Command command)
         {
             // TODO: Add checks for arguments
             __command.AddCommand(command);
@@ -76,7 +76,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public Command Build()
+        internal Command Build()
         {
             return __command;
         }

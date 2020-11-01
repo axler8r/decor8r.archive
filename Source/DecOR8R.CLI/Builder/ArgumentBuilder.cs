@@ -2,23 +2,23 @@ using System.CommandLine;
 
 namespace DecOR8R.CLI
 {
-    public class ArgumentBuilder<T>
+    internal class ArgumentBuilder<T>
     {
         private readonly Argument<T> __argument;
 
-        public ArgumentBuilder(string name)
+        internal ArgumentBuilder(string name)
         {
             // TODO: Add checks for arguments
             __argument = new Argument<T>(name);
         }
 
-        public ArgumentBuilder(string name, string description)
+        internal ArgumentBuilder(string name, string description)
         {
             // TODO: Add checks for arguments
             __argument = new Argument<T>(name, description);
         }
 
-        public ArgumentBuilder<T> AddAlias(string alias)
+        internal ArgumentBuilder<T> AddAlias(string alias)
         {
             // TODO: Add checks for arguments
             __argument.AddAlias(alias);
@@ -26,7 +26,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public ArgumentBuilder<T> SetArity(IArgumentArity arity)
+        internal ArgumentBuilder<T> SetArity(IArgumentArity arity)
         {
             // TODO: Add checks for arguments
             __argument.Arity = arity;
@@ -34,7 +34,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public ArgumentBuilder<T> SetDescription(string description)
+        internal ArgumentBuilder<T> SetDescription(string description)
         {
             // TODO: Add checks for arguments
             __argument.Description = description;
@@ -42,7 +42,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public ArgumentBuilder<T> SetDefaultValue(T value)
+        internal ArgumentBuilder<T> SetDefaultValue(T value)
         {
             // TODO: Add checks for arguments
             __argument.SetDefaultValue(value);
@@ -59,7 +59,7 @@ namespace DecOR8R.CLI
             return this;
         }
 
-        public Argument<T> Build()
+        internal Argument<T> Build()
         {
             return __argument;
         }
