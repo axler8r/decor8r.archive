@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "."
+		},
+		{
+			"path": "..\\..\\GitHub\\microsoft-pwsh-extension-ohmyposh"
 		}
 	],
 	"settings": {}
