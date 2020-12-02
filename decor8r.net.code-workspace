@@ -1,11 +1,21 @@
 {
 	"folders": [
 		{
+			"name": "DecOR8R",
 			"path": "."
 		},
 		{
-			"path": "..\\..\\GitHub\\microsoft-pwsh-extension-ohmyposh"
-		}
+			"name": "Inspiration/Powerline Python",
+			"path": "../../GitHub/python-app-powerline"
+		},
+		{
+			"name": "Inspiration/Powerline Go",
+			"path": "../../GitHub/go-app-powerline"
+		},
+		{
+			"name": "Inspiration/Oh My Posh",
+			"path": "../../GitHub/microsoft-pwsh-extension-ohmyposh"
+		},
 	],
 	"settings": {}
 }
