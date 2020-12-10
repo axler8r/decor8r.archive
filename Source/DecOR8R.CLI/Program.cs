@@ -11,44 +11,50 @@ namespace DecOR8R.CLI
         {
             var decor8r_ = new RootCommand("decor8r")
             {
-                new CommandBuilder("config")
-                    .AddCommand(
-                        new CommandBuilder("initialize")
+                new CommandBuilder("configure")
+                    .SetDescription("Configure decorator")
+                    .AddAlias("config")
+                    .AddCommand(new CommandBuilder("initialize")
+                        .SetDescription("Create a default configuration file")
+                        .AddAlias("init")
+                        .SetHandler(CommandHandler.Create(
+                            () =>
+                            {
+                                var config_ = new Configuration();
+                                var json_ = System.Text.Json.JsonSerializer.Serialize(config_);
+                                System.Console.WriteLine(json_);
+                            }))
                         .Build())
                     .Build(),
                 new CommandBuilder("decorate")
-                    .AddCommand(
-                        new CommandBuilder("terminal")
-                        .AddOption<int>(
-                            new OptionBuilder<int>("--width", () => System.Console.WindowWidth)
+                    .AddCommand(new CommandBuilder("terminal")
+                        .AddOption<int>(new OptionBuilder<int>(
+                                name: "--width",
+                                defaultValue: () => System.Console.WindowWidth)
                             .SetDescription("Terminal width")
                             .AddAlias("-w")
                             .Build())
-                        .AddOption<TerminalType>(
-                            new OptionBuilder<TerminalType>("--type", () => TerminalType.ANSI)
+                        .AddOption<TerminalType>(new OptionBuilder<TerminalType>(
+                                name: "--type",
+                                defaultValue: () => TerminalType.ANSI)
                             .SetDescription("Type of terminal")
                             .AddAlias("-t")
                             .Build())
-                        .AddArgument<DirectoryInfo>(
-                            new ArgumentBuilder<DirectoryInfo>("path")
+                        .AddArgument<DirectoryInfo>(new ArgumentBuilder<DirectoryInfo>(
+                                name: "path")
                             .SetDescription("Path to decorate")
                             .SetArity(ArgumentArity.ExactlyOne)
                             .Build())
-                        .SetHandler(
-                            CommandHandler.Create<DirectoryInfo, TerminalSepcification>(
-                                (DirectoryInfo path, TerminalSepcification termSpec) =>
-                                {
-                                    var terminalConfiguration_ = Configurator.GetTerminalDecorationConfiguration();
-                                    TerminalDecorator.Decorate(path, termSpec, terminalConfiguration_);
-                                }
-                            )
-                        )
+                        .SetHandler(CommandHandler.Create<DirectoryInfo, TerminalSepcification>(
+                            (DirectoryInfo path, TerminalSepcification termSpec) =>
+                            {
+                                var terminalConfiguration_ = Configurator.GetTerminalDecorationConfiguration();
+                                TerminalDecorator.Decorate(path, termSpec, terminalConfiguration_);
+                            }))
                         .Build())
-                    .AddCommand(
-                        new CommandBuilder("neovim")
+                    .AddCommand(new CommandBuilder("neovim")
                         .Build())
-                    .AddCommand(
-                        new CommandBuilder("tmux")
+                    .AddCommand(new CommandBuilder("tmux")
                         .Build())
                     .Build(),
             };
