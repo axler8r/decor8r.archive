@@ -1,3 +1,4 @@
+using System;
 using System.CommandLine;
 
 namespace DecOR8R.CLI
@@ -18,13 +19,9 @@ namespace DecOR8R.CLI
             __argument = new Argument<T>(name, description);
         }
 
-        internal ArgumentBuilder<T> AddAlias(string alias)
-        {
-            // TODO: Add checks for arguments
-            __argument.AddAlias(alias);
-
-            return this;
-        }
+        // TODO: Remove
+        [Obsolete("Corresponding wrapped method was removed.")]
+        internal ArgumentBuilder<T> AddAlias(string alias) => this;
 
         internal ArgumentBuilder<T> SetArity(IArgumentArity arity)
         {
