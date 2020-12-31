@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Text;
+using System.CommandLine.Rendering;
 
 namespace DecOR8R.CLI
 {
@@ -8,8 +9,8 @@ namespace DecOR8R.CLI
     {
         internal static void Decorate(
             DirectoryInfo path,
-            TerminalSepcification termSpec,
-            TerminalDecorationConfiguration configuration)
+            TerminalDecorationOptions tdopts,
+            Configuration configuration)
         {
             var pathToDecorate_ = path.ToString();
             var pathToHome_ = (
@@ -18,20 +19,20 @@ namespace DecOR8R.CLI
             ) ? Environment.GetEnvironmentVariable("HOME")
               : Environment.ExpandEnvironmentVariables("%HOMEDRIVE%%HOMEPATH%");
 
-            pathToDecorate_ = pathToDecorate_.Replace(pathToHome_, "~");
-            var paths_ = pathToDecorate_.Replace(Path.DirectorySeparatorChar.ToString(), "  ");
+            var tilde_ = configuration.Symbol.Common.Tilde;
+            pathToDecorate_ = pathToDecorate_.Replace(pathToHome_, tilde_);
+            var l2rSoft_ = configuration.Symbol.Common.Delimit.LeftToRight.Soft;
+            var paths_ = pathToDecorate_.Replace(Path.DirectorySeparatorChar.ToString(), $" {l2rSoft_} ");
+            var l2rHard_ = configuration.Symbol.Common.Delimit.LeftToRight.Hard;
 
-            var x_ = " ";
-
-            var currentEncoding_ = Console.OutputEncoding;
-            Console.OutputEncoding = Encoding.UTF8;
-            Console.WriteLine($"{x_}, {pathToHome_}");
-
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.WriteLine(paths_);
-            Console.ResetColor();
-            Console.OutputEncoding = currentEncoding_;
+            //var currentEncoding_ = Console.OutputEncoding;
+            //Console.OutputEncoding = Encoding.UTF8;
+            Console.WriteLine($"{Ansi.Color.Background.LightBlue}{Ansi.Color.Foreground.White}{paths_}{Ansi.Color.Foreground.Default}{Ansi.Color.Background.Default}");
+            //Console.ForegroundColor = ConsoleColor.White;
+            //Console.BackgroundColor = ConsoleColor.Green;
+            //Console.WriteLine(paths_);
+            //Console.ResetColor();
+            //Console.OutputEncoding = currentEncoding_;
         }
     }
 }
