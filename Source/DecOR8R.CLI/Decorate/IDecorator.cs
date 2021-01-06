@@ -3,10 +3,9 @@ namespace DecOR8R.CLI
 #nullable enable
     interface IDecorator
     {
-        string Decorate(ISegment segment);
-        string Decorate(params ISegment[] segments);
-        string Decorate<C>(C configuration, ISegment segment) where C : class?;
-        string Decorate<C>(C configuration, params ISegment[] segments) where C : class?;
+        string Decorate<O, C>(ISegment segment, O options, C configuration)
+                where O : class?
+                where C : class?;
     }
 #nullable disable
 }
