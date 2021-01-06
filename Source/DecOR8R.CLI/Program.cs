@@ -20,7 +20,7 @@ namespace DecOR8R.CLI
                         .SetHandler(CommandHandler.Create(
                             () =>
                             {
-                                var config_ = new Configuration();
+                                var config_ = Configurator.GetConfiguration();
                                 var json_ = System.Text.Json.JsonSerializer.Serialize(config_);
                                 System.Console.WriteLine(json_);
                             }))
@@ -45,11 +45,11 @@ namespace DecOR8R.CLI
                             .SetDescription("Path to decorate")
                             .SetArity(ArgumentArity.ExactlyOne)
                             .Build())
-                        .SetHandler(CommandHandler.Create<DirectoryInfo, TerminalSepcification>(
-                            (DirectoryInfo path, TerminalSepcification termSpec) =>
+                        .SetHandler(CommandHandler.Create<DirectoryInfo, TerminalDecorationOptions>(
+                            (DirectoryInfo path, TerminalDecorationOptions tdos) =>
                             {
-                                var terminalConfiguration_ = Configurator.GetTerminalDecorationConfiguration();
-                                TerminalDecorator.Decorate(path, termSpec, terminalConfiguration_);
+                                var configuration_ = Configurator.GetConfiguration();
+                                TerminalDecorator.Decorate(path, tdos, configuration_);
                             }))
                         .Build())
                     .AddCommand(new CommandBuilder("neovim")

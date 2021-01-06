@@ -104,14 +104,4 @@ namespace DecOR8R.CLI
         [JsonPropertyName("symbol")]
         public _Symbol Symbol { get; private set; } = new _Symbol();
     }
-
-    internal class Configurator
-    {
-        internal Configurator() { }
-
-        internal static TerminalDecorationConfiguration GetTerminalDecorationConfiguration()
-        {
-            throw new NotImplementedException();
-        }
-    }
 }
