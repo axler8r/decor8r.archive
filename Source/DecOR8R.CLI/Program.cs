@@ -1,12 +1,65 @@
-﻿using System;
+using System.CommandLine;
+using System.CommandLine.Invocation;
+using System.IO;
+using System.Threading.Tasks;
 
 namespace DecOR8R.CLI
 {
-    class Program
+    internal partial class Program
     {
-        static void Main(string[] args)
+        private static async Task<int> Main(params string[] args)
         {
-            Console.WriteLine("Hello World!");
+            var decor8r_ = new RootCommand("decor8r")
+            {
+                new CommandBuilder("configure")
+                    .SetDescription("Configure decorator")
+                    .AddAlias("config")
+                    .AddCommand(new CommandBuilder("initialize")
+                        .SetDescription("Create a default configuration file")
+                        .AddAlias("init")
+                        .SetHandler(CommandHandler.Create(
+                            () =>
+                            {
+                                var config_ = Configurator.GetConfiguration();
+                                var json_ = System.Text.Json.JsonSerializer.Serialize(config_);
+                                System.Console.WriteLine(json_);
+                            }))
+                        .Build())
+                    .Build(),
+                new CommandBuilder("decorate")
+                    .AddCommand(new CommandBuilder("terminal")
+                        .AddOption<int>(new OptionBuilder<int>(
+                                name: "--width",
+                                defaultValue: () => System.Console.WindowWidth)
+                            .SetDescription("Terminal width")
+                            .AddAlias("-w")
+                            .Build())
+                        .AddOption<TerminalType>(new OptionBuilder<TerminalType>(
+                                name: "--type",
+                                defaultValue: () => TerminalType.ANSI)
+                            .SetDescription("Type of terminal")
+                            .AddAlias("-t")
+                            .Build())
+                        .AddArgument<DirectoryInfo>(new ArgumentBuilder<DirectoryInfo>(
+                                name: "path")
+                            .SetDescription("Path to decorate")
+                            .SetArity(ArgumentArity.ExactlyOne)
+                            .Build())
+                        .SetHandler(CommandHandler.Create<DirectoryInfo, TerminalDecorationOptions>(
+                            (DirectoryInfo path, TerminalDecorationOptions tdos) =>
+                            {
+                                var configuration_ = Configurator.GetConfiguration();
+                                TerminalDecorator.Decorate(path, tdos, configuration_);
+                            }))
+                        .Build())
+                    .AddCommand(new CommandBuilder("neovim")
+                        .Build())
+                    .AddCommand(new CommandBuilder("tmux")
+                        .Build())
+                    .Build(),
+            };
+
+            return await decor8r_.InvokeAsync(args);
         }
     }
 }
