@@ -1,3 +1,9 @@
+# 0.7.3
+**2021-02-03**
+
+* Implement Azure DevOps pipeline
+
+
 # 0.7.2
 **2021-02-02**
 
