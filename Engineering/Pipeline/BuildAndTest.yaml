@@ -20,12 +20,11 @@ pool:
   vmImage: $(imageName)
 
 steps:
-- task: NuGetCommand@2
+- task: DotNetCoreCLI@2
   displayName: 'Restore'
   inputs:
-    majorVersion: 5
-    minorVersion: x
     command: restore
+    projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: 'Build'
