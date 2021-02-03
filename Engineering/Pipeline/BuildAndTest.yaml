@@ -36,5 +36,5 @@ steps:
   displayName: 'Test'
   inputs:
     command: test
-    projects: '**/*Test.csproj'
+    projects: '**/*Test/*.csproj'
     arguments: '--verbose normal'
