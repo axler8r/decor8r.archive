@@ -7,6 +7,9 @@ trigger:
 - master
 - develop
 
+variables:
+  buildConfiguration: 'DEBUG'
+
 strategy:
   matrix:
     linux:
@@ -21,20 +24,22 @@ pool:
 
 steps:
 - task: DotNetCoreCLI@2
-  displayName: 'Restore'
+  displayName: 'Restore $(buildConfiguration)'
   inputs:
     command: restore
+    arguments: '--configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
-  displayName: 'Build'
+  displayName: 'Build $(buildConfiguration)'
   inputs:
     command: build
+    arguments: '--configuration $(buildConfiguration)'
     projects: '**/*.csproj'
 
 - task: DotNetCoreCLI@2
   displayName: 'Test'
   inputs:
     command: test
+    arguments: '--configuration $(buildConfiguration) --verbose normal'
     projects: '**/*Test/*.csproj'
-    arguments: '--verbose normal'
