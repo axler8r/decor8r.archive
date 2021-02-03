@@ -41,5 +41,5 @@ steps:
   displayName: 'Test'
   inputs:
     command: test
-    arguments: '--configuration $(buildConfiguration) --verbose normal'
+    arguments: '--configuration $(buildConfiguration) --verbosity normal'
     projects: '**/*Test/*.csproj'
