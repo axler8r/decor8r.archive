@@ -1,14 +1,11 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
 - master
 - develop
 
+
 variables:
   buildConfiguration: 'DEBUG'
+
 
 strategy:
   matrix:
@@ -19,8 +16,10 @@ strategy:
     windows:
       imageName: 'windows-2019'
 
+
 pool:
   vmImage: $(imageName)
+
 
 steps:
 - task: DotNetCoreCLI@2
