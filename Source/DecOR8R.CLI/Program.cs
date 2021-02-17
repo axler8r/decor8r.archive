@@ -3,12 +3,22 @@ using System.CommandLine.Invocation;
 using System.IO;
 using System.Threading.Tasks;
 
+using Serilog;
+
 namespace DecOR8R.CLI
 {
     internal partial class Program
     {
+        private static readonly ILogger _logger = new LoggerConfiguration()
+            .WriteTo.File("decor8r.log")
+            .CreateLogger();
+
+        public static ILogger Logger => _logger;
+
         private static async Task<int> Main(params string[] args)
         {
+            Logger.Information("About to enter decor8r");
+
             var decor8r_ = new RootCommand("decor8r")
             {
                 new CommandBuilder("configure")
@@ -58,6 +68,8 @@ namespace DecOR8R.CLI
                         .Build())
                     .Build(),
             };
+
+            Logger.Information("About to exit decor8r");
 
             return await decor8r_.InvokeAsync(args);
         }
