@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text;
 using System.CommandLine.Rendering;
 
 namespace DecOR8R.CLI
@@ -12,6 +11,8 @@ namespace DecOR8R.CLI
             TerminalDecorationOptions tdopts,
             Configuration configuration)
         {
+            //Program.Logger.Information("About to enter Decorate");
+
             var pathToDecorate_ = path.ToString();
             var pathToHome_ = (
                 Environment.OSVersion.Platform == PlatformID.Unix ||
@@ -23,16 +24,10 @@ namespace DecOR8R.CLI
             pathToDecorate_ = pathToDecorate_.Replace(pathToHome_, tilde_);
             var l2rSoft_ = configuration.Symbol.Common.Delimit.LeftToRight.Soft;
             var paths_ = pathToDecorate_.Replace(Path.DirectorySeparatorChar.ToString(), $" {l2rSoft_} ");
-            var l2rHard_ = configuration.Symbol.Common.Delimit.LeftToRight.Hard;
 
-            //var currentEncoding_ = Console.OutputEncoding;
-            //Console.OutputEncoding = Encoding.UTF8;
             Console.WriteLine($"{Ansi.Color.Background.LightBlue}{Ansi.Color.Foreground.White}{paths_}{Ansi.Color.Foreground.Default}{Ansi.Color.Background.Default}");
-            //Console.ForegroundColor = ConsoleColor.White;
-            //Console.BackgroundColor = ConsoleColor.Green;
-            //Console.WriteLine(paths_);
-            //Console.ResetColor();
-            //Console.OutputEncoding = currentEncoding_;
+
+            //Program.Logger.Information("About to exit Decorate");
         }
     }
 }
