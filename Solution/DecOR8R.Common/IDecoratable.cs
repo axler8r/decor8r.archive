@@ -11,6 +11,6 @@ namespace DecOR8R.Common
         /// <summary>
         /// The thing that will be decorated.
         /// </summary>
-        public string Subject { get; }
+        string Subject { get; }
     }
 }

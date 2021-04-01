@@ -5,20 +5,20 @@ namespace DecOR8R.Common
     /// <summary>
     /// Decorates subjects for the appropriate targtes.
     /// </summary>
-    /// <typeparam name="K"></typeparam>
-    /// <typeparam name="V"></typeparam>
+    /// <typeparam name="K">The key type</typeparam>
+    /// <typeparam name="V">The value type</typeparam>
     public interface IDecorator<K, V> where V: IConvertible
     {
         /// <summary>
         /// Configuration data to use during the decoration process.
         /// </summary>
-        public IConfigurable<K, V> Configuration { get; }
+        IConfigurable<K, V> Configuration { get; }
 
         /// <summary>
         /// Decorate the subject
         /// </summary>
-        /// <param name="subject"></param>
-        /// <returns></returns>
-        public string Decorate(IDecoratable subject);
+        /// <param name="subject">The thing to decorate</param>
+        /// <returns>The decorated thing</returns>
+        string Decorate(IDecoratable subject);
     }
 }
