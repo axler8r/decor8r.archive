@@ -1,9 +1,4 @@
 ﻿{
-  "setting": {},
-  "test": {
-    "int": 10,
-    "str": "str",
-    "bool": true
-  }
+  "setting": {}
 }
 

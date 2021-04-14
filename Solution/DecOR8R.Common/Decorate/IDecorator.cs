@@ -10,11 +10,6 @@ namespace DecOR8R.Common
     public interface IDecorator<K, V> where V: IConvertible
     {
         /// <summary>
-        /// Configuration data to use during the decoration process.
-        /// </summary>
-        IConfigurable<K, V> Configuration { get; }
-
-        /// <summary>
         /// Decorate the subject
         /// </summary>
         /// <param name="subject">The thing to decorate</param>
