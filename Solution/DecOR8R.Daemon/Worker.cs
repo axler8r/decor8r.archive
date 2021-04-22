@@ -17,6 +17,18 @@ namespace DecOR8R.Daemon
             _logger = logger;
         }
 
+        public override Task ExecuteTask => base.ExecuteTask;
+
+        public override async Task StartAsync(CancellationToken cancellationToken)
+        {
+            await base.StartAsync(cancellationToken);
+        }
+
+        public override async Task StopAsync(CancellationToken cancellationToken)
+        {
+            await base.StopAsync(cancellationToken);
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested)
@@ -24,6 +36,11 @@ namespace DecOR8R.Daemon
                 _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
                 await Task.Delay(1000, stoppingToken);
             }
+        }
+
+        public override void Dispose()
+        {
+            base.Dispose();
         }
     }
 }
