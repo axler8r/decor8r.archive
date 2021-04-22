@@ -7,7 +7,7 @@ namespace DecOR8R.Common
     /// </summary>
     /// <typeparam name="K">The key type</typeparam>
     /// <typeparam name="V">The value type</typeparam>
-    public interface IDecorator<K, V> where V: IConvertible
+    public interface IDecorator<K, V> where V : IConvertible
     {
         /// <summary>
         /// Decorate the subject
