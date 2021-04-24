@@ -11,3 +11,4 @@ else {
     git clone https://github.com/starship/starship.git          rust-app-starship
     Pop-Location
 }
+

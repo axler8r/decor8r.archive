@@ -8,3 +8,4 @@ if (Test-Path $GitHubDir) {
     Remove-Item -Recurse -Force rust-app-starship
     Pop-Location
 }
+
