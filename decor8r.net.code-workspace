@@ -25,5 +25,7 @@
 			"path": "../../GitHub/microsoft-pwsh-extension-poshgit"
 		},
 	],
-	"settings": {}
+	"settings": {
+		"editor.tabSize": 4,
+	}
 }

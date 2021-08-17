@@ -1,7 +1,12 @@
 docker run `
-    --detach `
-    --mount 'type=volume,source=projects,destination=/root/Projects/AxlER8R' `
+    --name DecoR8R.NET `
+    --workdir="/root" `
+    --mount "type=volume,source=Projects,destination=/root/Projects" `
     --interactive `
     --tty `
-    --name decor8r.net `
+    --cpu-shares=256 `
+    --memory=8g `
+    --memory-reservation=2g `
+    --detach `
     mcr.microsoft.com/dotnet/sdk:5.0
+
