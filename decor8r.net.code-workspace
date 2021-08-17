@@ -10,7 +10,7 @@
 		},
 		{
 			"name": "Inspiration/StarShip",
-			"path": "../../GitHub/rust-app-startship"
+			"path": "../../GitHub/rust-app-starship"
 		},
 		{
 			"name": "Inspiration/Powerline Go",
@@ -25,5 +25,7 @@
 			"path": "../../GitHub/microsoft-pwsh-extension-poshgit"
 		},
 	],
-	"settings": {}
+	"settings": {
+		"editor.tabSize": 4,
+	}
 }

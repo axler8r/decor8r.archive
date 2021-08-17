@@ -5,9 +5,9 @@ namespace DecOR8R.CLI
 {
     public class Configuration
     {
-        public class _Symbol
+        public class Symbol_
         {
-            public class _Common
+            public class Common_
             {
                 [JsonPropertyName("at")]
                 public string At { get; private set; } = Char.ConvertFromUtf32(0x0040);
@@ -24,9 +24,9 @@ namespace DecOR8R.CLI
                 [JsonPropertyName("dash")]
                 public string Dash { get; private set; } = Char.ConvertFromUtf32(0x2212);
 
-                public class _Delimit
+                public class Delimit_
                 {
-                    public class _LeftToRight
+                    public class LeftToRight_
                     {
                         [JsonPropertyName("hard")]
                         public string Hard { get; private set; } = Char.ConvertFromUtf32(0xE0B0);
@@ -35,7 +35,7 @@ namespace DecOR8R.CLI
                         public string Soft { get; private set; } = Char.ConvertFromUtf32(0xE0B1);
                     }
 
-                    public class _RightToLeft
+                    public class RightToLeft_
                     {
                         [JsonPropertyName("hard")]
                         public string Hard { get; private set; } = Char.ConvertFromUtf32(0xE0B2);
@@ -45,19 +45,19 @@ namespace DecOR8R.CLI
                     }
 
                     [JsonPropertyName("leftToRight")]
-                    public _LeftToRight LeftToRight { get; private set; } = new _LeftToRight();
+                    public LeftToRight_ LeftToRight { get; private set; } = new LeftToRight_();
 
                     [JsonPropertyName("rightToLeft")]
-                    public _RightToLeft RightToLeft { get; private set; } = new _RightToLeft();
+                    public RightToLeft_ RightToLeft { get; private set; } = new RightToLeft_();
                 }
 
                 [JsonPropertyName("delimit")]
-                public _Delimit Delimit { get; private set; } = new _Delimit();
+                public Delimit_ Delimit { get; private set; } = new Delimit_();
             }
 
-            public class _Terminal
+            public class Terminal_
             {
-                public class _Version
+                public class Version_
                 {
                     [JsonPropertyName("branch")]
                     public string Branch { get; private set; } = Char.ConvertFromUtf32(0xE0A0);
@@ -91,17 +91,17 @@ namespace DecOR8R.CLI
                 }
 
                 [JsonPropertyName("version")]
-                public _Version Version { get; private set; } = new _Version();
+                public Version_ Version { get; private set; } = new Version_();
             }
 
             [JsonPropertyName("common")]
-            public _Common Common { get; private set; } = new _Common();
+            public Common_ Common { get; private set; } = new Common_();
 
             [JsonPropertyName("terminal")]
-            public _Terminal Terminal { get; private set; } = new _Terminal();
+            public Terminal_ Terminal { get; private set; } = new Terminal_();
         }
 
         [JsonPropertyName("symbol")]
-        public _Symbol Symbol { get; private set; } = new _Symbol();
+        public Symbol_ Symbol { get; private set; } = new Symbol_();
     }
 }

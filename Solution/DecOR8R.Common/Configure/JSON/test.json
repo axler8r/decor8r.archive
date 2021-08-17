@@ -1,0 +1,11 @@
+﻿{
+  "int": 10,
+  "str": "str",
+  "bool": true,
+  "test": {
+    "int": 10,
+    "str": "str",
+    "bool": true
+  }
+}
+
