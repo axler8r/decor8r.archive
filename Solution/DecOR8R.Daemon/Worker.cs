@@ -32,32 +32,37 @@ namespace DecOR8R.Daemon
             var address_ = new UnixDomainSocketEndPoint(_socketFile);
             _logger.LogInformation($"Unix socket address: {address_}.");
 
-            var listener_ = new Socket(
+            using (var listener_ = new Socket(
                 addressFamily: AddressFamily.Unix,
                 socketType: SocketType.Stream,
-                protocolType: ProtocolType.Unspecified);
-            listener_.Bind(address_);
-            listener_.Listen();
-            _logger.LogInformation($"Started listner: {listener_.ToString()}.");
-
-            while (!stoppingToken.IsCancellationRequested)
+                protocolType: ProtocolType.Unspecified))
             {
-                _logger.LogInformation("Ready to accept requests...");
-                var socket_ = listener_.Accept();
-                _logger.LogInformation($"Accepped request: {socket_.ToString()}.");
+                listener_.Bind(address_);
+                listener_.Listen();
+                _logger.LogInformation($"Started listner: {listener_.ToString()}.");
 
-                var buffer_ = new byte[1024];
-                var requestSize_ = socket_.Receive(
-                    buffer: buffer_,
-                    offset: 0,
-                    size: buffer_.Length,
-                    socketFlags: SocketFlags.None);
-                var request_ = Encoding.UTF8.GetString(buffer_, 0, requestSize_);
-                _logger.LogInformation($"Receved: {request_}");
+                while (!stoppingToken.IsCancellationRequested)
+                {
+                    await Task.Delay(0, stoppingToken);
 
-                socket_.Close();
+                    _logger.LogInformation("Ready to accept requests...");
+                    using (var socket_ = listener_.Accept())
+                    {
+                        _logger.LogInformation($"Accepped request: {socket_.ToString()}.");
 
-                await Task.Delay(0, stoppingToken);
+                        var buffer_ = new byte[1024];
+                        var requestSize_ = socket_.Receive(
+                            buffer: buffer_,
+                            offset: 0,
+                            size: buffer_.Length,
+                            socketFlags: SocketFlags.None);
+                        var request_ = Encoding.UTF8.GetString(buffer_, 0, requestSize_);
+                        _logger.LogInformation($"Receved: {request_}");
+
+                        socket_.Shutdown(SocketShutdown.Both);
+                        socket_.Close();
+                    }
+                }
             }
         }
     }
