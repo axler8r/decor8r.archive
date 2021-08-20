@@ -1,1 +1,1 @@
-docker rm decor8r.net
+docker rm DecoR8R.NET

@@ -1,1 +1,1 @@
-docker stop decor8r.net
+docker stop DecoR8R.NET
