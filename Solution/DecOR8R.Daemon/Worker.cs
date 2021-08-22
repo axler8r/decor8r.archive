@@ -50,9 +50,9 @@ namespace DecOR8R.Daemon
                         _logger.LogInformation($"Accepped request: {socket_.ToString()}.");
 
                         var pipe_ = new Pipe();
-                        var receive_ = ReceiveRequest(socket_, pipe_.Writer);
-                        var transmit_ = TransmitResponse(pipe_.Reader);
-                        await Task.WhenAll(transmit_, receive_);
+                        var filled_ = Fill(socket_, pipe_.Writer);
+                        var flushed_ = Flush(pipe_.Reader);
+                        await Task.WhenAll(flushed_, filled_);
 
                         socket_.Shutdown(SocketShutdown.Both);
                         socket_.Close();
@@ -60,7 +60,8 @@ namespace DecOR8R.Daemon
                 }
             }
         }
-        private async Task ReceiveRequest(Socket socket, PipeWriter writer)
+
+        private async Task Fill(Socket socket, PipeWriter writer)
         {
             const int initialBufferSize_ = 512;
 
@@ -85,7 +86,7 @@ namespace DecOR8R.Daemon
             await writer.CompleteAsync();
         }
 
-        private async Task TransmitResponse(PipeReader reader)
+        private async Task Flush(PipeReader reader)
         {
             while (true)
             {
