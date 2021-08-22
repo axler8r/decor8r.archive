@@ -11,4 +11,3 @@ docker run \
     --memory-reservation=2g \
     --detach \
     mcr.microsoft.com/dotnet/sdk:5.0
-

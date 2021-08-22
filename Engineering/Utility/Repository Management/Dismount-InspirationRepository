@@ -11,4 +11,3 @@ then
     rm -rf rust-app-starship
     popd -q
 fi
-
