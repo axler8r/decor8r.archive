@@ -1,1 +1,3 @@
+#! /usr/bin/env zsh
+
 docker stop DecoR8R.NET

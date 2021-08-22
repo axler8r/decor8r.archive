@@ -1,2 +1,3 @@
-docker attach DecoR8R.NET
+#! /usr/bin/env zsh
 
+docker attach DecoR8R.NET

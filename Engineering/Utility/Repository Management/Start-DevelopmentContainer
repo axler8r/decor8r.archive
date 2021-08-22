@@ -1,1 +1,3 @@
+#! /usr/bin/env zsh
+
 docker start DecoR8R.NET

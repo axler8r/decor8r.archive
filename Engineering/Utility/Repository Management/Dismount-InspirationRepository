@@ -1,11 +1,14 @@
-$GitHubDir = "~/Projects/GitHub"
-if (Test-Path $GitHubDir) {
-    Push-Location -Path $GitHubDir
-    Remove-Item -Recurse -Force go-app-powerline
-    Remove-Item -Recurse -Force microsoft-pwsh-extension-ohmyposh
-    Remove-Item -Recurse -Force microsoft-pwsh-extension-poshgit
-    Remove-Item -Recurse -Force python-app-powerline
-    Remove-Item -Recurse -Force rust-app-starship
-    Pop-Location
-}
+#! /usr/bin/env zsh
+
+GITHUB_DIR="~/Projects/GitHub"
+if [[ -d ${GITHUB_DIR} ]]
+then
+    pushd -q ${GITHUB_DIR}
+    rm -rf go-app-powerline
+    rm -rf microsoft-pwsh-extension-ohmyposh
+    rm -rf microsoft-pwsh-extension-poshgit
+    rm -rf python-app-powerline
+    rm -rf rust-app-starship
+    popd -q
+fi
 
