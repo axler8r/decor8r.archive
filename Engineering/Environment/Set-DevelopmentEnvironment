@@ -1,5 +1,3 @@
-#! /usr/bin/zsh
-
 _DOTNET_BASE=$(dotnet --info | grep "Base Path" | awk '{print $3}')
 echo "DOTNET_BASE: ${_DOTNET_BASE}"
 
@@ -9,4 +7,3 @@ echo "DOTNET_ROOT: ${_DOTNET_ROOT}"
 export MSBuildSDKsPath="${_DOTNET_BASE}Sdks/"
 export DOTNET_ROOT="${_DOTNET_ROOT}"
 export path=("${_DOTNET_ROOT}" $path)
-
