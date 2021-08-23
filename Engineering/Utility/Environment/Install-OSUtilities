@@ -1,0 +1,5 @@
+#! /usr/bin/env zsh
+
+apt update
+apt upgrade -y
+apt install htop lsof strace socat git-flow tig tree vim -y
