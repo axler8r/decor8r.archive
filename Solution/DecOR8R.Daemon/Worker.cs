@@ -1,6 +1,4 @@
-using System.Buffers;
 using System.IO;
-using System.IO.Pipelines;
 using System.Text;
 using System.Threading;
 using System.Net.Sockets;
@@ -49,81 +47,23 @@ namespace DecOR8R.Daemon
                     {
                         _logger.LogInformation($"Accepped request: {socket_.ToString()}.");
 
-                        var pipe_ = new Pipe();
-                        var filled_ = Fill(socket_, pipe_.Writer);
-                        var flushed_ = Flush(pipe_.Reader);
-                        await Task.WhenAll(flushed_, filled_);
+                        var buffer_ = new byte[1024];
+                        var requestSize_ = socket_.Receive(
+                            buffer: buffer_,
+                            offset: 0,
+                            size: buffer_.Length,
+                            socketFlags: SocketFlags.None);
+                        var request_ = Encoding.UTF8.GetString(buffer_, 0, requestSize_);
+                        _logger.LogInformation($"Receved: {request_}");
+
+                        socket_.Send(Encoding.UTF8.GetBytes(request_.ToCharArray()));
+                        _logger.LogInformation("Sent response.");
 
                         socket_.Shutdown(SocketShutdown.Both);
                         socket_.Close();
                     }
                 }
             }
-        }
-
-        private async Task Fill(Socket socket, PipeWriter writer)
-        {
-            const int initialBufferSize_ = 512;
-
-            while (true)
-            {
-                System.Memory<byte> memory_ = writer.GetMemory(initialBufferSize_);
-                try
-                {
-                    int bytesReceived_ = await socket.ReceiveAsync(memory_, SocketFlags.None);
-                    if (bytesReceived_ == 0) break;
-                    writer.Advance(bytesReceived_);
-                }
-                catch (System.Exception e)
-                {
-                    _logger.LogError($"Exception: {e}");
-                    break;
-                }
-                var result_ = await writer.FlushAsync();
-                if (result_.IsCompleted) break;
-            }
-
-            await writer.CompleteAsync();
-        }
-
-        private async Task Flush(PipeReader reader)
-        {
-            while (true)
-            {
-                ReadResult result_ = await reader.ReadAsync();
-                ReadOnlySequence<byte> buffer_ = result_.Buffer;
-
-                while (TryReadLine(ref buffer_, out ReadOnlySequence<byte> line))
-                {
-                    ProcessLine(line);
-                }
-
-                reader.AdvanceTo(buffer_.Start, buffer_.End);
-                if (result_.IsCompleted) break;
-            }
-
-            await reader.CompleteAsync();
-        }
-
-        private bool TryReadLine(ref ReadOnlySequence<byte> buffer, out ReadOnlySequence<byte> line)
-        {
-            System.SequencePosition? lookForEOL_ = buffer.PositionOf((byte)'\n');
-
-            if (lookForEOL_ == null)
-            {
-                line = default;
-                return false;
-            }
-
-            line = buffer.Slice(0, lookForEOL_.Value);
-            buffer = buffer.Slice(buffer.GetPosition(1, lookForEOL_.Value));
-            return true;
-        }
-
-        private void ProcessLine(ReadOnlySequence<byte> line)
-        {
-            var request_ = Encoding.UTF8.GetString(line);
-            _logger.LogInformation(request_);
         }
     }
 }
