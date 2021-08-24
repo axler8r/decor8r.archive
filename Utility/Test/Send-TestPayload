@@ -1,5 +1,6 @@
 #! /usr/bin/env zsh
 
-[[ -f $(which socat) ]] \
-&& echo "Testing! Testing! 1, 2, 3..." | socat - UNIX-CONNECT:/tmp/decor8r.sock \
-|| echo "Socat not found. Please install."
+ADDRESS="/tmp/decor8r.sock"
+[[ ! -S ${ADDRESS} ]] && exit 1
+[[ -x $(which socat) ]]  && echo "${PWD}" | socat - UNIX-CONNECT:${ADDRESS} || exit 2
+
