@@ -1,15 +1,10 @@
 #! /usr/bin/env zsh
 
-GITHUB_DIR="~/Projects/GitHub"
-if [[ -n ${GITHUB_DIR} ]]
-then
-    mkdir ${GITHUB_DIR}
-else
-    pushd -q ${GITHUB_DIR}
-    git clone https://github.com/justjanne/powerline-go.git     go-app-powerline
-    git clone https://github.com/JanDeDobbeleer/oh-my-posh.git  microsoft-pwsh-extension-ohmyposh
-    git clone https://github.com/dahlbyk/posh-git.git           microsoft-pwsh-extension-poshgit
-    git clone https://github.com/powerline/powerline.git        python-app-powerline
-    git clone https://github.com/starship/starship.git          rust-app-starship
-    popd
-fi
+GITHUB_DIR="${HOME}/Projects/GitHub"
+[[ -d "${GITHUB_DIR}" ]] && mkdir "${GITHUB_DIR}"
+git clone https://github.com/justjanne/powerline-go.git     "${GITHUB_DIR}"/go-app-powerline
+git clone https://github.com/JanDeDobbeleer/oh-my-posh.git  "${GITHUB_DIR}"/microsoft-pwsh-extension-ohmyposh
+git clone https://github.com/dahlbyk/posh-git.git           "${GITHUB_DIR}"/microsoft-pwsh-extension-poshgit
+git clone https://github.com/powerline/powerline.git        "${GITHUB_DIR}"/python-app-powerline
+git clone https://github.com/starship/starship.git          "${GITHUB_DIR}"/rust-app-starship
+
