@@ -1,6 +1,12 @@
 #! /usr/bin/env zsh
 
-ADDRESS="/tmp/decor8r.sock"
+if [[ -z "${TMPDIR}" ]]
+then
+    ADDRESS="/tmp/decor8r.sock"
+else
+    ADDRESS="${TMPDIR}/decor8r.sock"
+fi
+
 [[ ! -S ${ADDRESS} ]] && exit 1
 [[ -x $(which socat) ]]  && echo "${PWD}" | socat - UNIX-CONNECT:${ADDRESS} || exit 2
 
