@@ -1,0 +1,38 @@
+# Defaults
+#
+# Set out all the defaults here, commneted out, with instructions on
+# how to use them by "uncommenting" keys.
+
+# one of
+# greyscale
+# solarized dark
+# solarized light
+# monokai
+# materlial
+# material pale night
+theme = "greyscale"
+# one of
+# powerline
+# axler8r
+# block
+style = "powerline"
+
+[terminal]
+# decor8r config prompt show [prompt|rprompt|cprompt|dprompt]
+# prompt = [ "ssh", "mode", "user", "path", "git", "pipe", "status"]
+# right_prompt = []
+# continue_prmpt = ["continue"]
+# debug_prompt = []
+# compress = ["path", "git"]
+# compress_mode = "elison"
+
+[nvim]
+# status_line = ["mode", "file"]
+# rstatus_line = ["cursor", "percentage", "encoding", "lineterminator"]
+# tab_line = ["file", "buffer"]
+
+[tmux]
+# status_line = ["session", "tabs"]
+# rstatus_line = ["host", "time", "date", "load", "uptime", "venv"]
+
+# [[themes]]
