@@ -4,6 +4,10 @@
 			"name": "DecOR8R",
 			"path": "."
 		},
+        {
+            "name": "DecOR8R Wiki",
+            "path": "../decor8r.wiki"
+        },
 		{
 			"name": "Inspiration/Powerline Python",
 			"path": "../../GitHub/python-app-powerline"
