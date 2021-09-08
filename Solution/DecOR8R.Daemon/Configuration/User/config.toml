@@ -1,20 +1,4 @@
-# Defaults
-#
-# Set out all the defaults here, commneted out, with instructions on
-# how to use them by "uncommenting" keys.
-
-# one of
-# greyscale
-# solarized dark
-# solarized light
-# monokai
-# materlial
-# material pale night
-theme = "greyscale"
-# one of
-# powerline
-# axler8r
-# block
+scheme = "greyscale"
 style = "powerline"
 
 [terminal]
@@ -35,4 +19,6 @@ style = "powerline"
 # status_line = ["session", "tabs"]
 # rstatus_line = ["host", "time", "date", "load", "uptime", "venv"]
 
-# [[themes]]
+# [[schemes]]
+
+# [[styles]]
