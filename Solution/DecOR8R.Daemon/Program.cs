@@ -1,6 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.Extensions.Configuration;
 using Serilog;
+using System;
+
 
 namespace DecOR8R.Daemon
 {
@@ -24,6 +27,10 @@ namespace DecOR8R.Daemon
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
+                .ConfigureAppConfiguration((context, configurations) => {
+                    configurations.AddJsonFile("appsettings.json");
+                })
+                #if Linux
                 .UseSystemd()
                 .ConfigureLogging((context, loggers) => {
                 })
