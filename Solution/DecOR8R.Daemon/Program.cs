@@ -22,7 +22,22 @@ namespace DecOR8R.Daemon
                     rollingInterval: RollingInterval.Day)
                 .CreateLogger();
 
-            CreateHostBuilder(args).Build().Run();
+            try
+            {
+                Log.Information("Starting DecOR8R.Daemon.Program");
+                CreateHostBuilder(args).Build().Run();
+                Log.Information("Stopping DecOR8R.Daemon.Program");
+            }
+            catch (Exception ex)
+            {
+                Log.Fatal(ex, "Unable to run service");
+                // PRINT AN ERROR MESSAGE
+                return;
+            }
+            finally
+            {
+                Log.CloseAndFlush();
+            }
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -32,12 +47,23 @@ namespace DecOR8R.Daemon
                 })
                 #if Linux
                 .UseSystemd()
+                #elif OSX
+                .UseSystemd()
+                #elif Windows
+                .UseWindowsService()
+                #endif
                 .ConfigureLogging((context, loggers) => {
                 })
                 .UseSerilog()
-                .ConfigureServices((hostContext, services) =>
+                .ConfigureServices((context, services) =>
                 {
-                    services.AddHostedService<Worker>();
+                    //services.AddHostedService<Worker>();
+                    services.AddHostedService<ConfigurationService>();
+                    services.AddHostedService<LoggingService>();
+                    services.AddHostedService<EndpointService>();
+                    services.AddHostedService<TerminalDecorationService>();
+                    services.AddHostedService<TmuxDecorationService>();
+                    services.AddHostedService<NeovimDecorationService>();
                 });
     }
 }
