@@ -35,13 +35,13 @@ namespace DecOR8R.Daemon
 
             try
             {
-                Log.Information("Starting DecOR8R.Daemon.Program");
+                Log.ForContext<Daemon>().Information("Starting decor8rd");
                 CreateHostBuilder(args).Build().Run();
-                Log.Information("Stopping DecOR8R.Daemon.Program");
+                Log.ForContext<Daemon>().Information("Stopping decor8rd");
             }
             catch (Exception ex)
             {
-                Log.Fatal(ex, "Unable to run service");
+                Log.ForContext<Daemon>().Fatal(ex, "Unable to run decor8rd");
                 // PRINT AN ERROR MESSAGE
                 return;
             }
