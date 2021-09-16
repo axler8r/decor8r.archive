@@ -8,13 +8,15 @@ namespace DecOR8R.Daemon
 {
     public class TerminalDecorationService : BackgroundService
     {
+        private static ILogger _log = Log.ForContext<TerminalDecorationService>();
+
         public TerminalDecorationService()
         {
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            Log.Information($"Starting {this.GetType().Name}...");
+            _log.Information($"Starting {this.GetType().Name}...");
             return base.StartAsync(cancellationToken);
         }
 
@@ -28,7 +30,7 @@ namespace DecOR8R.Daemon
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-            Log.Information($"Stopping {this.GetType().Name}...");
+            _log.Information($"Stopping {this.GetType().Name}...");
             return base.StopAsync(cancellationToken);
         }
     }
