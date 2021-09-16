@@ -1,8 +1,10 @@
-using Microsoft.Extensions.DependencyInjection;
+using System;
+
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+
 using Serilog;
-using System;
 
 
 namespace DecOR8R.Daemon
