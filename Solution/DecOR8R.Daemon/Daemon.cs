@@ -23,12 +23,13 @@ namespace DecOR8R.Daemon
                 Log.ForContext<Daemon>().Information("Starting decor8rd");
                 CreateHostBuilder(args).Build().Run();
                 Log.ForContext<Daemon>().Information("Stopping decor8rd");
+                return 0;
             }
             catch (Exception ex)
             {
                 Log.ForContext<Daemon>().Fatal(ex, "Unable to run decor8rd");
                 // PRINT AN ERROR MESSAGE
-                return;
+                return 1;
             }
             finally
             {
@@ -38,10 +39,6 @@ namespace DecOR8R.Daemon
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, configurations) =>
-                {
-                    configurations.AddJsonFile("appsettings.json");
-                })
 #if Linux
                 .UseSystemd()
 #elif OSX
@@ -59,7 +56,6 @@ namespace DecOR8R.Daemon
                 .ConfigureLogging((context, loggers) =>
                 {
                 })
-                .UseSerilog()
                 .ConfigureServices((context, services) =>
                 {
                     //services.AddHostedService<Worker>();
