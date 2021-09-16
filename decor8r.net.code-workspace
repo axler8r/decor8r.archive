@@ -29,7 +29,17 @@
             "path": "../../GitHub/microsoft-pwsh-extension-poshgit"
         },
     ],
-	"settings": {
-		"editor.tabSize": 4,
-	}
+    "settings": {
+        "editor.tabSize": 4,
+        "files.exclude": {
+            "**/.DS_Store": true,
+            "**/.git": true,
+            "**/.github": true,
+            "**/.token": true,
+            "**/.vscode": true,
+            "**/Thumbs.db": true,
+            "**/bin": true,
+            "**/obj": true,
+        },
+    }
 }
