@@ -9,28 +9,13 @@ namespace DecOR8R.Daemon
 {
     public class Daemon
     {
-        // TODO: Move to configuration file
-        private const string FILE_LOG_FORMAT =
-            "[{Timestamp:yyyy-MM-ddTHH:mm:ss.ffK} {Level:u4}] " +
-            "({SourceContext}) " +
-            "{Message}{NewLine}{Exception}";
-
-        // TODO: Move to configuration file
-        private const string CONSOLE_LOG_FORMAT =
-            "[{Level:u4}] ({SourceContext}) {Message}{NewLine}{Exception}";
-
-        public static void Main(string[] args)
+        public static int Main(string[] args)
         {
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.Development.json")
+                .Build();
             Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Information()
-                .Enrich.FromLogContext()
-#if DEBUG
-                .WriteTo.Console(outputTemplate: CONSOLE_LOG_FORMAT)
-#endif
-                .WriteTo.File(
-                    path: "decor8r.log",
-                    rollingInterval: RollingInterval.Day,
-                    outputTemplate: FILE_LOG_FORMAT)
+                .ReadFrom.Configuration(configuration)
                 .CreateLogger();
 
             try
@@ -64,6 +49,13 @@ namespace DecOR8R.Daemon
 #elif Windows
                 .UseWindowsService()
 #endif
+                .UseSerilog()
+                .ConfigureAppConfiguration((context, configurations) =>
+                {
+                    var env = context.HostingEnvironment;
+                    configurations.AddJsonFile("appsettings.json");
+                    configurations.AddJsonFile($"appsettings.{env.EnvironmentName}.json");
+                })
                 .ConfigureLogging((context, loggers) =>
                 {
                 })
