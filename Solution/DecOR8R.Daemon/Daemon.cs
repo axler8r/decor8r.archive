@@ -12,7 +12,7 @@ namespace DecOR8R.Daemon
         public static int Main(string[] args)
         {
             var configuration = new ConfigurationBuilder()
-                .AddJsonFile("appsettings.Development.json")
+                .AddJsonFile("Configuration/logsettings.json")
                 .Build();
             Log.Logger = new LoggerConfiguration()
                 .ReadFrom.Configuration(configuration)
@@ -49,9 +49,9 @@ namespace DecOR8R.Daemon
                 .UseSerilog()
                 .ConfigureAppConfiguration((context, configurations) =>
                 {
-                    var env = context.HostingEnvironment;
-                    configurations.AddJsonFile("appsettings.json");
-                    configurations.AddJsonFile($"appsettings.{env.EnvironmentName}.json");
+                    var env_ = context.HostingEnvironment;
+                    configurations.AddJsonFile($"Configuration/appsettings.json");
+                    configurations.AddJsonFile($"Configuration/appsettings.{env_.EnvironmentName}.json");
                 })
                 .ConfigureLogging((context, loggers) =>
                 {
