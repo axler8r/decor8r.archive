@@ -53,17 +53,19 @@ namespace DecOR8R.Daemon
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
-                .ConfigureAppConfiguration((context, configurations) => {
+                .ConfigureAppConfiguration((context, configurations) =>
+                {
                     configurations.AddJsonFile("appsettings.json");
                 })
-                #if Linux
+#if Linux
                 .UseSystemd()
-                #elif OSX
+#elif OSX
                 .UseSystemd()
-                #elif Windows
+#elif Windows
                 .UseWindowsService()
-                #endif
-                .ConfigureLogging((context, loggers) => {
+#endif
+                .ConfigureLogging((context, loggers) =>
+                {
                 })
                 .UseSerilog()
                 .ConfigureServices((context, services) =>
