@@ -7,7 +7,7 @@ using System;
 
 namespace DecOR8R.Daemon
 {
-    public class Program
+    public class Daemon
     {
         // TODO: Move to configuration file
         private const string FILE_LOG_FORMAT =
