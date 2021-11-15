@@ -3,20 +3,15 @@ using System.Threading.Tasks;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
-
-namespace DecOR8R.Daemon
+namespace DecOR8R.Daemon.Services
 {
     public class NeovimDecorationService : BackgroundService
     {
-        private static ILogger _log = Log.ForContext<NeovimDecorationService>();
-
-        public NeovimDecorationService()
-        {
-        }
+        private static readonly ILogger Log = Serilog.Log.ForContext<NeovimDecorationService>();
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
-            _log.Information($"Starting {this.GetType().Name}...");
+            Log.Information($"Starting {GetType().Name}...");
             return base.StartAsync(cancellationToken);
         }
 
@@ -30,7 +25,7 @@ namespace DecOR8R.Daemon
 
         public override Task StopAsync(CancellationToken cancellationToken)
         {
-            _log.Information($"Stopping {this.GetType().Name}...");
+            Log.Information($"Stopping {GetType().Name}...");
             return base.StopAsync(cancellationToken);
         }
     }

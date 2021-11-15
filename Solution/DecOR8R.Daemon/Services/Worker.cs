@@ -1,13 +1,13 @@
 using System.IO;
+using System.Net.Sockets;
 using System.Text;
 using System.Threading;
-using System.Net.Sockets;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Configuration;
 
-namespace DecOR8R.Daemon
+namespace DecOR8R.Daemon.Services
 {
     public class Worker : BackgroundService
     {
@@ -26,42 +26,40 @@ namespace DecOR8R.Daemon
         {
             if (File.Exists(_socketFile)) File.Delete(_socketFile);
 
-            var address_ = new UnixDomainSocketEndPoint(_socketFile);
-            _logger.LogInformation($"Unix socket address: {address_}.");
+            var address = new UnixDomainSocketEndPoint(_socketFile);
+            _logger.LogInformation($"Unix socket address: {address}.");
 
-            using (var listener_ = new Socket(
-                addressFamily: AddressFamily.Unix,
-                socketType: SocketType.Stream,
-                protocolType: ProtocolType.Unspecified))
+            using (var listener = new Socket(
+                AddressFamily.Unix,
+                SocketType.Stream,
+                ProtocolType.Unspecified))
             {
-                listener_.Bind(address_);
-                listener_.Listen();
-                _logger.LogInformation($"Started listner: {listener_.ToString()}.");
+                listener.Bind(address);
+                listener.Listen();
+                _logger.LogInformation($"Started listener: {listener}.");
 
                 while (!stoppingToken.IsCancellationRequested)
                 {
                     await Task.Delay(0, stoppingToken);
 
                     _logger.LogInformation("Ready to accept requests...");
-                    using (var socket_ = listener_.Accept())
-                    {
-                        _logger.LogInformation($"Accepped request: {socket_.ToString()}.");
+                    using var socket = await listener.AcceptAsync(stoppingToken);
+                    _logger.LogInformation($"Accepted request: {socket}.");
 
-                        var buffer_ = new byte[1024];
-                        var requestSize_ = socket_.Receive(
-                            buffer: buffer_,
-                            offset: 0,
-                            size: buffer_.Length,
-                            socketFlags: SocketFlags.None);
-                        var request_ = Encoding.UTF8.GetString(buffer_, 0, requestSize_);
-                        _logger.LogInformation($"Receved: {request_}");
+                    var buffer = new byte[1024];
+                    var requestSize = socket.Receive(
+                        buffer,
+                        0,
+                        buffer.Length,
+                        SocketFlags.None);
+                    var request = Encoding.UTF8.GetString(buffer, 0, requestSize);
+                    _logger.LogInformation($"Received: {request}");
 
-                        socket_.Send(Encoding.UTF8.GetBytes(request_.ToCharArray()));
-                        _logger.LogInformation("Sent response.");
+                    socket.Send(Encoding.UTF8.GetBytes(request.ToCharArray()));
+                    _logger.LogInformation("Sent response.");
 
-                        socket_.Shutdown(SocketShutdown.Both);
-                        socket_.Close();
-                    }
+                    socket.Shutdown(SocketShutdown.Both);
+                    socket.Close();
                 }
             }
         }

@@ -1,5 +1,5 @@
 using System;
-
+using DecOR8R.Daemon.Services;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
