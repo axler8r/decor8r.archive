@@ -17,10 +17,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecOR8R.Daemon.Vim", "DecOR
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecOR8R.Daemon.Tmux", "DecOR8R.Daemon.Tmux\DecOR8R.Daemon.Tmux.csproj", "{F02DAA1A-2836-4D4A-A2A0-0169F84BDE60}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecOR8R.Common", "DecOR8R.Common\DecOR8R.Common.csproj", "{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DecOR8R.Common.Test", "DecOR8R.Common.Test\DecOR8R.Common.Test.csproj", "{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -103,30 +99,6 @@ Global
 		{F02DAA1A-2836-4D4A-A2A0-0169F84BDE60}.Release|x64.Build.0 = Release|Any CPU
 		{F02DAA1A-2836-4D4A-A2A0-0169F84BDE60}.Release|x86.ActiveCfg = Release|Any CPU
 		{F02DAA1A-2836-4D4A-A2A0-0169F84BDE60}.Release|x86.Build.0 = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|x64.Build.0 = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Debug|x86.Build.0 = Debug|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|x64.ActiveCfg = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|x64.Build.0 = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|x86.ActiveCfg = Release|Any CPU
-		{4A1027A0-D121-49DF-A1EF-8DE3D8D3B274}.Release|x86.Build.0 = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|x64.Build.0 = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Debug|x86.Build.0 = Debug|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|x64.ActiveCfg = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|x64.Build.0 = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|x86.ActiveCfg = Release|Any CPU
-		{E31C9AE9-FD31-400C-A519-3CE8F0EE67B6}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
