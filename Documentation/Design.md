@@ -1,22 +1,25 @@
 # Design
-`DecoR8R` informs its users about their environment. It does not try to display all relevant and pertinent information on the command line. Instead, it shares the repsonsibility to inform accross `tmux`, `nvim` and the shell (`zsh`, `bash`, `pwsh` and `fish`).
+
+`DecoR8R` informs its users about their environment. It does not try to display all relevant and pertinent information
+on the command line. Instead, it shares the repsonsibility to inform accross `tmux`, `nvim` and the shell (`zsh`, `bash`
+, `pwsh` and `fish`).
 
 It is opinionated. It does not try to cover all tools or environements.
 
-
 ## Goals
+
 * Sensible defaults
 * Intuitive
 * Themes
 
-
 ## Questions
+
 * Should PWD be handled as:
     1. [×] A string
     1. [ ] A DirectoryInfo
 
-
 ## Components
+
 1. **CLI** (_executable_)
     * Generate shell, nvim and tmux functions
     * Send decoration request to Daemon
@@ -44,9 +47,10 @@ It is opinionated. It does not try to cover all tools or environements.
     * Create decorations for tmux status bar
     * Retrun decorations to Daemon
 
-
 ## Decorator Responsibility
+
 Information about:
+
 * Path -> Terminal Decorator
 * Git -> Terminal Decorator
 * Terminal mode -> Terminal Decorator
@@ -66,8 +70,6 @@ Information about:
     * Reason
     * NodeJS
 
-
 ## Implementation
-
 
 ## Exclusions

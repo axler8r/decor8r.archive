@@ -1,11 +1,9 @@
 using System;
 using DecOR8R.Daemon.Services;
-using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-
+using Microsoft.Extensions.Hosting;
 using Serilog;
-
 
 namespace DecOR8R.Daemon
 {
@@ -52,12 +50,10 @@ namespace DecOR8R.Daemon
                 .ConfigureAppConfiguration((context, configurations) =>
                 {
                     var env_ = context.HostingEnvironment;
-                    configurations.AddJsonFile($"Configuration/appsettings.json");
+                    configurations.AddJsonFile("Configuration/appsettings.json");
                     configurations.AddJsonFile($"Configuration/appsettings.{env_.EnvironmentName}.json");
                 })
-                .ConfigureLogging((context, loggers) =>
-                {
-                })
+                .ConfigureLogging((context, loggers) => { })
                 .ConfigureServices((context, services) =>
                 {
                     services.AddHostedService<TransCeiver>();

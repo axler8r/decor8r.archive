@@ -17,10 +17,7 @@ namespace DecOR8R.Daemon.Services
 
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            while (!stoppingToken.IsCancellationRequested)
-            {
-                await Task.Delay(30000, stoppingToken);
-            }
+            while (!stoppingToken.IsCancellationRequested) await Task.Delay(30000, stoppingToken);
         }
 
         public override Task StopAsync(CancellationToken cancellationToken)

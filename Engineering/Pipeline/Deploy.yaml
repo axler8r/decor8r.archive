@@ -4,12 +4,12 @@
 # https://aka.ms/yaml
 
 trigger:
-- master
+  - master
 
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
-- script: echo [TODO] Implement!
-  displayName: 'Implement'
+  - script: echo [TODO] Implement!
+    displayName: 'Implement'
 
