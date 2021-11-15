@@ -1,44 +1,38 @@
 using System;
-using System.CommandLine;
-using System.CommandLine.Invocation;
 using System.IO;
-using System.Threading.Tasks;
+using System.Net.Sockets;
+using System.Text;
 
 namespace DecOR8R.CLI
 {
-    internal partial class Program
+    internal static class Program
     {
-
-        private static async Task<int> Main(params string[] args)
+        private static int Main(params string[] args)
         {
-            var decor8r_ = new RootCommand() {
-                new OptionBuilder<FileInfo>("--configuration")
-                    .AddAlias("--config")
-                    .SetRequried(false)
-                    .Build(),
-                new ArgumentBuilder<String>(
-                    name: "path",
-                    description: "Path to decorate")
-                    .Build()
-            };
-            decor8r_.Handler = CommandHandler.Create<FileInfo, String>((configuration, path) =>
+            try
             {
-                if (configuration != null && !configuration.Exists)
-                {
-                    System.Console.WriteLine(String.Format(
-                        "{0}\n\t{1}\n\t{2}\n\t{3}",
-                        "Error! Cannot load configuration file (ECFG000).",
-                        "To learn more, run: decor8r describe ECFG000.",
-                        "To create a valid configuration file run: decor8r config init.",
-                        "For more information visit https://github.com/axler8r/decor8r/wiki/Configuration."));
-                }
-                else
-                {
-                    System.Console.WriteLine(path);
-                }
-            });
+                var address = Path.Combine(Path.GetTempPath(), "decor8r.sock");
+                var endpoint = new UnixDomainSocketEndPoint(address);
+                using var socket = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+                socket.Connect(endpoint);
 
-            return await decor8r_.InvokeAsync(args);
+                var requestBytes = Encoding.UTF8.GetBytes("Hello!");
+                var request = Encoding.UTF8.GetString(requestBytes);
+                socket.Send(requestBytes);
+
+                var responseBytes = new byte[1024];
+                var responseSize = socket.Receive(responseBytes);
+                var response = Encoding.UTF8.GetString(responseBytes, 0, responseSize);
+
+                Console.WriteLine($"Sent {request}, got {response}");
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                return 1;
+            }
+
+            return 0;
         }
     }
 }

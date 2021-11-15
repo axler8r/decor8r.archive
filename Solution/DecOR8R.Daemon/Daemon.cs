@@ -60,13 +60,13 @@ namespace DecOR8R.Daemon
                 })
                 .ConfigureServices((context, services) =>
                 {
-                    //services.AddHostedService<Worker>();
-                    services.AddHostedService<ConfigurationService>();
-                    services.AddHostedService<LoggingService>();
-                    services.AddHostedService<EndpointService>();
-                    services.AddHostedService<TerminalDecorationService>();
-                    services.AddHostedService<TmuxDecorationService>();
-                    services.AddHostedService<NeovimDecorationService>();
+                    services.AddHostedService<TransCeiver>();
+                    //services.AddHostedService<ConfigurationService>();
+                    //services.AddHostedService<LoggingService>();
+                    //services.AddHostedService<EndpointService>();
+                    //services.AddHostedService<TerminalDecorationService>();
+                    //services.AddHostedService<TmuxDecorationService>();
+                    //services.AddHostedService<NeovimDecorationService>();
                 });
     }
 }
