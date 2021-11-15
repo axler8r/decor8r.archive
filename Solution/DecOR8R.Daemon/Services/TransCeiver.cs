@@ -9,13 +9,13 @@ using Microsoft.Extensions.Logging;
 
 namespace DecOR8R.Daemon.Services
 {
-    public class Worker : BackgroundService
+    public class TransCeiver : BackgroundService
     {
-        private readonly ILogger<Worker> _logger;
+        private readonly ILogger<TransCeiver> _logger;
         private readonly IConfiguration _configuration;
         private readonly string _socketFile;
 
-        public Worker(ILogger<Worker> logger, IConfiguration configuration, string socket = "decor8r.sock")
+        public TransCeiver(ILogger<TransCeiver> logger, IConfiguration configuration, string socket = "decor8r.sock")
         {
             _logger = logger;
             _configuration = configuration;
