@@ -11,8 +11,8 @@ namespace DecOR8R.Daemon.Services
 {
     public class TransCeiver : BackgroundService
     {
-        private readonly IConfiguration _configuration;
         private readonly ILogger<TransCeiver> _logger;
+        private readonly IConfiguration _configuration;
         private readonly string _socketFile;
 
         public TransCeiver(ILogger<TransCeiver> logger, IConfiguration configuration, string socket = "decor8r.sock")
