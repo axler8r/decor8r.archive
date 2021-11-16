@@ -56,7 +56,7 @@ namespace DecOR8R.Daemon
                 .ConfigureLogging((context, loggers) => { })
                 .ConfigureServices((context, services) =>
                 {
-                    services.AddHostedService<TransCeiver>();
+                    services.AddHostedService<Transceiver>();
                     //services.AddHostedService<ConfigurationService>();
                     //services.AddHostedService<LoggingService>();
                     //services.AddHostedService<EndpointService>();
