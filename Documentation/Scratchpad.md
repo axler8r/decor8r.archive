@@ -4,7 +4,7 @@ decor8r
 
 Usage:
     decor8r config new [<dir>]
-    decor8r congig import <file> [<dir>]
+    decor8r config import <file> [<dir>]
     decor8r config show
     decor8r config check [<dir>|<file>]
     decor8r config backup <gist> <repo>
@@ -28,7 +28,6 @@ Neovim Options:
     1. `zsh`
     1. `bash`
 1. `docker decorate nvim`
-1. `docker decorate shell`
 1. `docker decorate tmux`
 1. `docker config new`
 1. `docker config show`
