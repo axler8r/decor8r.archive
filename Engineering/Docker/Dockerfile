@@ -10,4 +10,3 @@ RUN             apt update --yes &&                                     \
 USER            decor8r
 WORKDIR         /home/decor8r
 ENTRYPOINT      ["/usr/bin/zsh"]
-

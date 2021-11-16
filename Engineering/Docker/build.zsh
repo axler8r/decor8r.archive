@@ -21,4 +21,3 @@ if [[ -x $(which docker) ]] {
 } else {
     printf "%s\n" "Docker not installed"
 }
-
