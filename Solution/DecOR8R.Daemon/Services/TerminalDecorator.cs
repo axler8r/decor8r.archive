@@ -5,9 +5,9 @@ using Serilog;
 
 namespace DecOR8R.Daemon.Services
 {
-    public class TerminalDecorationService : BackgroundService
+    public class TerminalDecorator : BackgroundService
     {
-        private static readonly ILogger Log = Serilog.Log.ForContext<TerminalDecorationService>();
+        private static readonly ILogger Log = Serilog.Log.ForContext<TerminalDecorator>();
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {
