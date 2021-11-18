@@ -9,14 +9,14 @@ using Serilog;
 
 namespace DecOR8R.Daemon.Services;
 
-public class Transceiver : BackgroundService
+public class Endpoint : BackgroundService
 {
     private readonly TerminalDecorator _decorator = new TerminalDecorator();
-    private static readonly ILogger Log = Serilog.Log.ForContext<Transceiver>();
+    private static readonly ILogger Log = Serilog.Log.ForContext<Endpoint>();
     private readonly IConfiguration _configuration;
     private readonly string _socketFile;
 
-    public Transceiver(IConfiguration configuration, string socket = "decor8r.sock")
+    public Endpoint(IConfiguration configuration, string socket = "decor8r.sock")
     {
         _configuration = configuration;
         _socketFile = Path.Combine(Path.GetTempPath(), socket);
