@@ -5,63 +5,68 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
+using Serilog;
 
-namespace DecOR8R.Daemon.Services
+namespace DecOR8R.Daemon.Services;
+
+public class Transceiver : BackgroundService
 {
-    public class Transceiver : BackgroundService
+    private readonly TerminalDecorator _decorator = new TerminalDecorator();
+    private static readonly ILogger Log = Serilog.Log.ForContext<Transceiver>();
+    private readonly IConfiguration _configuration;
+    private readonly string _socketFile;
+
+    public Transceiver(IConfiguration configuration, string socket = "decor8r.sock")
     {
-        private readonly ILogger<Transceiver> _logger;
-        private readonly IConfiguration _configuration;
-        private readonly string _socketFile;
+        _configuration = configuration;
+        _socketFile = Path.Combine(Path.GetTempPath(), socket);
+    }
 
-        public Transceiver(ILogger<Transceiver> logger, IConfiguration configuration, string socket = "decor8r.sock")
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        if (File.Exists(_socketFile)) File.Delete(_socketFile);
+
+        var address = new UnixDomainSocketEndPoint(_socketFile);
+        Log.Information($"Unix socket address: {address}.");
+
+        using var listener = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+        listener.Bind(address);
+        listener.Listen();
+
+        while (!stoppingToken.IsCancellationRequested)
         {
-            _logger = logger;
-            _configuration = configuration;
-            _socketFile = Path.Combine(Path.GetTempPath(), socket);
-        }
+            await Task.Delay(0, stoppingToken);
 
-        protected override async Task ExecuteAsync(CancellationToken stoppingToken)
-        {
-            if (File.Exists(_socketFile)) File.Delete(_socketFile);
+            Log.Information("Ready to accept requests...");
+            using var socket = await listener.AcceptAsync(stoppingToken);
+            Log.Information($"Accepted request: {socket}.");
 
-            var address = new UnixDomainSocketEndPoint(_socketFile);
-            _logger.LogInformation($"Unix socket address: {address}.");
+            var buffer = new byte[1024];
+            var requestSize = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
+            var request = Encoding.UTF8.GetString(buffer, 0, requestSize);
+            Log.Information($"Received: {request}");
 
-            using (var listener = new Socket(
-                AddressFamily.Unix,
-                SocketType.Stream,
-                ProtocolType.Unspecified))
+            var lines = request.Split("\n");
+            string path = string.Empty;
+            foreach (var line in lines)
             {
-                listener.Bind(address);
-                listener.Listen();
-                _logger.LogInformation($"Started listener: {listener}.");
-
-                while (!stoppingToken.IsCancellationRequested)
+                if (line.StartsWith("path="))
                 {
-                    await Task.Delay(0, stoppingToken);
+                     path = line.Replace("path=", string.Empty);
 
-                    _logger.LogInformation("Ready to accept requests...");
-                    using var socket = await listener.AcceptAsync(stoppingToken);
-                    _logger.LogInformation($"Accepted request: {socket}.");
-
-                    var buffer = new byte[1024];
-                    var requestSize = socket.Receive(
-                        buffer,
-                        0,
-                        buffer.Length,
-                        SocketFlags.None);
-                    var request = Encoding.UTF8.GetString(buffer, 0, requestSize);
-                    _logger.LogInformation($"Received: {request}");
-
-                    socket.Send(Encoding.UTF8.GetBytes(request.ToCharArray()));
-                    _logger.LogInformation("Sent response.");
-
-                    socket.Shutdown(SocketShutdown.Both);
-                    socket.Close();
                 }
             }
+
+            string response = string.Empty;
+            if (path.Length != 0)
+            {
+                response = _decorator.Decorate(path);
+            }
+
+            socket.Send(Encoding.UTF8.GetBytes(response.ToCharArray()));
+
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
         }
     }
 }
