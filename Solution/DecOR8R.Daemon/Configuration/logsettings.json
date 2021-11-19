@@ -10,14 +10,11 @@
         "Microsoft": "Warning"
       }
     },
-    "Enrich": [
-      "FromLogContext"
-    ],
     "WriteTo": [
       {
         "Name": "Console",
         "Args": {
-          "outputTemplate": "> {Level:u4} {SourceContext} — {Message}{NewLine}{Exception}",
+          "outputTemplate": "> [{Level:u4}] {Message}{NewLine}{Exception}",
           "theme": "Serilog.Sinks.SystemConsole.Themes.ConsoleTheme::None, Serilog.Sinks.Console"
         }
       },
@@ -26,7 +23,7 @@
         "Args": {
           "path": "Logs/decor8rd-.log",
           "rollingInterval": "Day",
-          "outputTemplate": "[{Timestamp:yyyy-MM-ddTHH:mm:ss.ffK} {Level:u4}] ({SourceContext}) {Message}{NewLine}{Exception}",
+          "outputTemplate": "[{Level:u4}] {Timestamp:yyyy-MM-ddTHH:mm:ss.ffK} ({SourceContext}) {Message}{NewLine}{Exception}",
           "restrictedToMinimumLevel": "Debug"
         }
       }
