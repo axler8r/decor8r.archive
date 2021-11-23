@@ -1,3 +1,4 @@
+using static System.CommandLine.Rendering.Ansi;
 using Serilog;
 
 namespace DecOR8R.Daemon.Services;
@@ -14,6 +15,7 @@ public class TerminalDecorator
         }
 
         var result = path.Replace("/", "  ");
+        result = $"{Base16.Foreground.Base2}{Base16.Background.Blue}{result}{Color.Background.Default}{Color.Foreground.Default}{Base16.Foreground.Blue} {Base16.Foreground.Default}";
 
         return result;
     }
