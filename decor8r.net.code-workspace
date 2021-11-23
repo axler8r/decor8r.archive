@@ -41,5 +41,8 @@
             "**/bin": true,
             "**/obj": true,
         },
+        "files.watcherExclude": {
+            "**/target": true
+        },
     }
 }
