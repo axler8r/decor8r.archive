@@ -1,9 +1,8 @@
 using static System.CommandLine.Rendering.Ansi;
-using Serilog;
 
-namespace DecOR8R.Daemon.Services;
+namespace DecOR8R.Daemon.Decorators.Terminal;
 
-public class TerminalDecorator
+class TerminalDecorator : IDecorator<string>
 {
     private static readonly ILogger Log = Serilog.Log.ForContext<TerminalDecorator>();
 
