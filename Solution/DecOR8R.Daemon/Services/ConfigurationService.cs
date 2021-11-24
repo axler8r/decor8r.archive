@@ -1,5 +1,7 @@
+using System;
 using System.Threading;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
@@ -7,7 +9,14 @@ namespace DecOR8R.Daemon.Services
 {
     public class ConfigurationService : BackgroundService
     {
+        private readonly IConfiguration _configuration;
+
         private static readonly ILogger Log = Serilog.Log.ForContext<ConfigurationService>();
+
+        ConfigurationService(IConfiguration configuration)
+        {
+            _configuration = configuration;
+        }
 
         public override Task StartAsync(CancellationToken cancellationToken)
         {

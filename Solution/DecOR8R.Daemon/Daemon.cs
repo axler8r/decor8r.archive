@@ -56,7 +56,7 @@ public class Daemon
             .ConfigureLogging((context, loggers) => { })
             .ConfigureServices((context, services) =>
             {
+                services.AddHostedService<ConfigurationService>();
                 services.AddHostedService<Endpoint>();
-                //services.AddHostedService<ConfigurationService>();
             });
 }
