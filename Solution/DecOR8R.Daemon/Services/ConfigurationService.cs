@@ -24,6 +24,11 @@ namespace DecOR8R.Daemon.Services
             return base.StartAsync(cancellationToken);
         }
 
+        private string TranslateEnvironmentVariableFormat(string s)
+        {
+            return s.Replace("${", "%").Replace("}", "%");
+        }
+
         protected override async Task ExecuteAsync(CancellationToken stoppingToken)
         {
             while (!stoppingToken.IsCancellationRequested) await Task.Delay(30000, stoppingToken);
