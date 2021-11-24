@@ -1,7 +1,7 @@
 using System.CommandLine.Rendering;
 using static System.CommandLine.Rendering.Ansi;
 
-namespace DecOR8R.Daemon.Services;
+namespace DecOR8R.Daemon.Decorators;
 
 internal static class Base16
 {
