@@ -7,16 +7,19 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Serilog;
 
+using DecOR8R.Daemon.Decorators.Terminal;
+
 namespace DecOR8R.Daemon.Services;
 
-public class Endpoint : BackgroundService
+// TODO: Rename to EndpointService
+class Endpoint : BackgroundService
 {
     private readonly TerminalDecorator _decorator = new TerminalDecorator();
     private static readonly ILogger Log = Serilog.Log.ForContext<Endpoint>();
     private readonly IConfiguration _configuration;
     private readonly string _socketFile;
 
-    public Endpoint(IConfiguration configuration, string socket = "decor8r.sock")
+    Endpoint(IConfiguration configuration, string socket = "decor8r.sock")
     {
         _configuration = configuration;
         _socketFile = Path.Combine(Path.GetTempPath(), socket);

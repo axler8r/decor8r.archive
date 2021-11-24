@@ -7,7 +7,7 @@ using Serilog;
 
 namespace DecOR8R.Daemon.Services
 {
-    public class ConfigurationService : BackgroundService
+    class ConfigurationService : BackgroundService
     {
         private readonly IConfiguration _configuration;
 
