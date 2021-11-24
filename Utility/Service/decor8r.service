@@ -1,0 +1,15 @@
+[Unit]
+Description=Decorator Daemon
+Documentation=man:decor8r(8)
+
+[Service]
+#ExecStart=dotnet DummyService/bin/debug/DummyService.dll
+ExecStart=dotnet /srv/axler8r/decor8r/decor8rd
+Type=forking
+SyslogIdentifier=DecoR8RD
+Restart=on-failure
+User=axler8r
+Group=axler8r
+
+[Install]
+WantedBy=multi-user.target
