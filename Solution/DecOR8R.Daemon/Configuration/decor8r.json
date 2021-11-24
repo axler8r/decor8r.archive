@@ -1,0 +1,57 @@
+{
+  "Decorator": {
+    "Scheme": "",
+    "Style": ""
+  },
+  "Terminal": {
+    "Prompt": [],
+    "RightPrompt": [],
+    "ContinuePrompt": [],
+    "DebugPrompt": []
+  },
+  "Tmux": {},
+  "NeoVim": {},
+  "Schemes": [
+    {
+      "Name": "Monochrome"
+    },
+    {
+      "Name": "SolarizedDark"
+    },
+    {
+      "Name": "SolarizedLight"
+    },
+    {
+      "Name": "Monokai"
+    },
+    {
+      "Name": "Material"
+    },
+    {
+      "Name": "MaterialDarker"
+    },
+    {
+      "Name": "MaterailLighter"
+    },
+    {
+      "Name": "MaterialPaleNight"
+    },
+    {
+      "Name": "Campbell"
+    },
+    {
+      "Name": "AxlER8R"
+    }
+  ],
+  "Styles": [
+    {
+      "Name": "Basic"
+    },
+    {
+      "Name": "Powerline"
+    },
+    {
+      "Name": "AxlER8R"
+    }
+  ]
+}

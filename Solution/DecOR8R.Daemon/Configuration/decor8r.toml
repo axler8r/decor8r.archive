@@ -1,0 +1,59 @@
+scheme = "Monochrome"
+style = "Powerline"
+
+[terminal]
+# decor8r config prompt show [prompt|rprompt|cprompt|dprompt]
+prompt = [ "ssh", "mode", "user", "path", "git", "pipe", "status"]
+right_prompt = []
+continue_prmpt = ["continue"]
+debug_prompt = []
+compress = ["path", "git"]
+compress_mode = "elison"
+
+[nvim]
+status_line = ["mode", "file"]
+rstatus_line = ["cursor", "percentage", "encoding", "lineterminator"]
+tab_line = ["file", "buffer"]
+
+[tmux]
+status_line = ["session", "tabs"]
+rstatus_line = ["host", "time", "date", "load", "uptime", "venv"]
+
+[[schemes]]
+name = "Monochrome"
+
+[[schemes]]
+name = "SolarizedDark"
+
+[[schemes]]
+name = "SolarizedLight"
+
+[[schemes]]
+name = "Monokai"
+
+[[schemes]]
+name = "Material"
+
+[[schemes]]
+name = "MaterialDarker"
+
+[[schemes]]
+name = "MaterailLighter"
+
+[[schemes]]
+name = "MaterialPaleNight"
+
+[[schemes]]
+name = "Campbell"
+
+[[schemes]]
+name = "AxlER8R"
+
+[[styles]]
+name = "Basic"
+
+[[styles]]
+name = "Powerline"
+
+[[styles]]
+name = "AxlER8R"
