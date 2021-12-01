@@ -19,7 +19,7 @@ class Endpoint : BackgroundService
     private readonly IConfiguration _configuration;
     private readonly string _socketFile;
 
-    Endpoint(IConfiguration configuration, string socket = "decor8r.sock")
+    public Endpoint(IConfiguration configuration, string socket = "decor8r.sock")
     {
         _configuration = configuration;
         _socketFile = Path.Combine(Path.GetTempPath(), socket);
