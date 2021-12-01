@@ -1,6 +1,31 @@
 scheme = "Monochrome"
 style = "Powerline"
 
+[default]
+separator_right = ""
+separator_left = ""
+terminator_right = ""
+terminlator_left = ""
+git_branch = ""
+git_stash = "▣"
+git_ahead = "▲"
+git_behind = "▼"
+git_ahead_behind = "◆"
+git_identical = "≡"
+git_add = "+"
+git_remove = "-"
+git_modify = "~"
+git_conflict = "!"
+not_git = "?"
+venv_dart = ""
+venv_dotnet = ""
+venv_elixir = ""
+venv_kotlin = ""
+venv_python = ""
+venv_ruby = ""
+venv_scala = ""
+vnev_rust = ""
+
 [terminal]
 # decor8r config prompt show [prompt|rprompt|cprompt|dprompt]
 prompt = [ "ssh", "mode", "user", "path", "git", "pipe", "status"]
@@ -9,6 +34,8 @@ continue_prmpt = ["continue"]
 debug_prompt = []
 compress = ["path", "git"]
 compress_mode = "elison"
+
+[terminal.ssh]
 
 [nvim]
 status_line = ["mode", "file"]
@@ -23,31 +50,7 @@ rstatus_line = ["host", "time", "date", "load", "uptime", "venv"]
 name = "Monochrome"
 
 [[schemes]]
-name = "SolarizedDark"
-
-[[schemes]]
-name = "SolarizedLight"
-
-[[schemes]]
-name = "Monokai"
-
-[[schemes]]
-name = "Material"
-
-[[schemes]]
-name = "MaterialDarker"
-
-[[schemes]]
-name = "MaterailLighter"
-
-[[schemes]]
-name = "MaterialPaleNight"
-
-[[schemes]]
-name = "Campbell"
-
-[[schemes]]
-name = "AxlER8R"
+name = "Base16"
 
 [[styles]]
 name = "Basic"

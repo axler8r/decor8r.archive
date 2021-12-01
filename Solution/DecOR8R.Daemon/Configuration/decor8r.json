@@ -1,57 +1,105 @@
 {
-  "Decorator": {
-    "Scheme": "",
-    "Style": ""
-  },
+  "Style": "Powerline",
+  "Theme": "Default",
   "Terminal": {
-    "Prompt": [],
+    "Prompt": [
+      "SSH",
+      "Mode",
+      "User",
+      "Path",
+      "Git",
+      "Pipe",
+      "Status"
+    ],
     "RightPrompt": [],
     "ContinuePrompt": [],
-    "DebugPrompt": []
+    "DebugPrompt": [],
+    "Section": {
+      "TODO:": "Have a lookup table for decorators, complete with configuration",
+      "SSH": {
+        "Decorator": "SshDecorator",
+        "Background": "Yellow",
+        "Foreground": "Black",
+        "Bold": false
+      },
+      "Mode": {
+        "Decorator": "ModeDecorator",
+        "Background": "Green",
+        "Foreground": "White",
+        "Bold": true,
+        "Compress": true,
+        "CompressionStrategies": [
+          "Truncate",
+          "Drop"
+        ]
+      },
+      "User": {
+        "Decorator": "UserDecorator",
+        "Background": "Blue",
+        "Foreground": "White",
+        "Bold": true
+      },
+      "Path": {
+        "Decorator": "PathDecorator",
+        "Background": "Base02",
+        "Foreground": "Base2",
+        "Bold": false,
+        "Compress": true,
+        "CompressionStrategies": [
+          "Elide",
+          "Truncate",
+          "Drop"
+        ],
+        "BoldLeaf": true
+      },
+      "Git": {
+        "Decorator": "GitDecorator",
+        "Background": "Base1",
+        "Foreground": "Base01",
+        "Bold": true,
+        "Posh": true,
+        "Compress": true,
+        "CompressionStrategies": [
+          "Truncate",
+          "Drop"
+        ]
+      },
+      "Pipe": {
+        "Decorator": "PipeDecorator",
+        "Chain": true,
+        "Success": {
+          "Background": "Green",
+          "Foreground": "White"
+        },
+        "Failure": {
+          "Background": "Red",
+          "Foreground": "White"
+        },
+        "Bold": true,
+        "ShowStatus": "OnError"
+      },
+      "Status": {
+        "Decorator": "StatusDecorator",
+        "Success": {
+          "Background": "Green",
+          "Foreground": "White"
+        },
+        "Failure": {
+          "Background": "Red",
+          "Foreground": "White"
+        },
+        "Bold": true,
+        "ShowStatus": "OnError"
+      }
+    }
   },
-  "Tmux": {},
-  "NeoVim": {},
-  "Schemes": [
-    {
-      "Name": "Monochrome"
-    },
-    {
-      "Name": "SolarizedDark"
-    },
-    {
-      "Name": "SolarizedLight"
-    },
-    {
-      "Name": "Monokai"
-    },
-    {
-      "Name": "Material"
-    },
-    {
-      "Name": "MaterialDarker"
-    },
-    {
-      "Name": "MaterailLighter"
-    },
-    {
-      "Name": "MaterialPaleNight"
-    },
-    {
-      "Name": "Campbell"
-    },
-    {
-      "Name": "AxlER8R"
+  "Tmux": {
+    "Section": {}
+  },
+  "NeoVim": {
+    "Section": {
+      "Tab": {},
+      "Status": {}
     }
-  ],
-  "Styles": [
-    {
-      "Name": "Basic"
-    },
-    {
-      "Name": "Powerline"
-    },
-    {
-      "Name": "AxlER8R"
-    }
-  ]
+  }
 }

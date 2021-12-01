@@ -1,0 +1,29 @@
+{
+  "Powerline": {
+    "Terminator": {
+      "Left": "",
+      "Right": ""
+    },
+    "Separator": {
+      "Left": "",
+      "Right": ""
+    },
+    "Git": {
+      "Branch": "",
+      "Stash": "▣",
+      "Ahead": "▲",
+      "Behind": "▼",
+      "AheadAndBehind": "▲▼",
+      "Identical": "≡",
+      "Add": "+",
+      "Remove": "-",
+      "Modify": "~",
+      "Conflict": "!",
+      "Absent": "?"
+    },
+    "Miscelanious": {
+      "Bar": "│",
+      "Lock": ""
+    }
+  }
+}
