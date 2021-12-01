@@ -51,7 +51,11 @@ public class Daemon
             {
                 var env_ = context.HostingEnvironment;
                 configurations.AddJsonFile("Configuration/appsettings.json");
-                configurations.AddJsonFile($"Configuration/appsettings.{env_.EnvironmentName}.json");
+                // configurations.AddJsonFile("Configuration/decor8r.json");
+                // configurations.AddJsonFile("Configuration/decor8r-style.json");
+                configurations.AddJsonFile(
+                    $"Configuration/appsettings.{env_.EnvironmentName}.json",
+                    optional: true);
             })
             .ConfigureLogging((context, loggers) => { })
             .ConfigureServices((context, services) =>

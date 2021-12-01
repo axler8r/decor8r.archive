@@ -1,21 +1,40 @@
 using System;
+using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
+
 using Serilog;
 
 namespace DecOR8R.Daemon.Services
 {
     class ConfigurationService : BackgroundService
     {
-        private readonly IConfiguration _configuration;
+        private readonly IConfiguration _applicationConfiguration;
+        private readonly IConfiguration _userConfiguration;
 
         private static readonly ILogger Log = Serilog.Log.ForContext<ConfigurationService>();
 
-        ConfigurationService(IConfiguration configuration)
+        public ConfigurationService(IConfiguration configuration)
         {
-            _configuration = configuration;
+            _applicationConfiguration = configuration;
+            _userConfiguration = LoadUserConfiguration();
+        }
+
+        // TODO: Exception?
+        private IConfiguration LoadUserConfiguration()
+        {
+            var path_ = _applicationConfiguration
+                .GetSection("Configuration:File")
+                .GetValue<string>("Path");
+            var file_ = _applicationConfiguration
+                .GetSection("Configuration:File")
+                .GetValue<string>("Name");
+            var configFile_ = Path.Join(path_, file_);
+
+            return new ConfigurationBuilder().AddJsonFile(configFile_).Build();
         }
 
         public override Task StartAsync(CancellationToken cancellationToken)
