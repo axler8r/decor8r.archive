@@ -50,13 +50,13 @@ public class Daemon
             .ConfigureAppConfiguration((context, configurations) =>
             {
                 var env_ = context.HostingEnvironment;
-                configurations.AddJsonFile("Configuration/appsettings.json");
-                configurations.AddJsonFile($"Configuration/appsettings.{env_.EnvironmentName}.json");
+                configurations.AddJsonFile("appsettings.json");
+                configurations.AddJsonFile($"appsettings.{env_.EnvironmentName}.json", optional: true);
             })
             .ConfigureLogging((context, loggers) => { })
             .ConfigureServices((context, services) =>
             {
+                services.AddHostedService<ConfigurationService>();
                 services.AddHostedService<Endpoint>();
-                //services.AddHostedService<ConfigurationService>();
             });
 }

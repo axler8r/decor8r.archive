@@ -1,13 +1,13 @@
 using System.CommandLine.Rendering;
 using static System.CommandLine.Rendering.Ansi;
 
-namespace DecOR8R.Daemon.Services;
+namespace DecOR8R.Daemon.Decorators;
 
 internal static class Base16
 {
     internal static class Foreground
     {
-        internal static AnsiControlCode Default = Color.Foreground.Default;
+        internal static AnsiControlCode Default => Color.Foreground.Default;
         internal static AnsiControlCode Base03 => Color.Foreground.DarkGray;
         internal static AnsiControlCode Base02 => Color.Foreground.Black;
         internal static AnsiControlCode Base01 => Color.Foreground.LightGreen;
@@ -28,7 +28,7 @@ internal static class Base16
 
     internal static class Background
     {
-        internal static AnsiControlCode Default = Color.Background.Default;
+        internal static AnsiControlCode Default => Color.Background.Default;
         internal static AnsiControlCode Base03 => Color.Background.DarkGray;
         internal static AnsiControlCode Base02 => Color.Background.Black;
         internal static AnsiControlCode Base01 => Color.Background.LightGreen;
