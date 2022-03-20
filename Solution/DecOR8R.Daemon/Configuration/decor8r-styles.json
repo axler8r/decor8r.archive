@@ -1,29 +1,29 @@
 {
   "Powerline": {
     "Terminator": {
-      "Left": "",
-      "Right": ""
+      "Left": "\uE0B0",
+      "Right": "\uE0B2"
     },
     "Separator": {
-      "Left": "",
-      "Right": ""
+      "Left": "\uE0B1",
+      "Right": "\uE0B3"
     },
     "Git": {
-      "Branch": "",
-      "Stash": "▣",
-      "Ahead": "▲",
-      "Behind": "▼",
-      "AheadAndBehind": "▲▼",
-      "Identical": "≡",
+      "Branch": "\uE0A0",
+      "Stash": "\u25A3",
+      "Ahead": "\u25B2",
+      "Behind": "\u25BC",
+      "AheadAndBehind": "\u25B2\u25BC",
+      "Identical": "\u2261",
       "Add": "+",
       "Remove": "-",
       "Modify": "~",
       "Conflict": "!",
       "Absent": "?"
     },
-    "Miscelanious": {
-      "Bar": "│",
-      "Lock": ""
+    "Miscellaneous": {
+      "Bar": "\u2502",
+      "Lock": "\uE0A2"
     }
   }
 }

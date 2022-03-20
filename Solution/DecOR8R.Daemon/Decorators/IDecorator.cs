@@ -1,6 +1,6 @@
 namespace DecOR8R.Daemon.Decorators;
 
-public interface IDecorator<S>
+public interface IDecorator<TS>
 {
-    public string Decorate(S subject);
+    public string Decorate(TS subject);
 }

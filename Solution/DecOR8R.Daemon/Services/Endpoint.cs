@@ -29,47 +29,47 @@ class Endpoint : BackgroundService
     {
         if (File.Exists(_socketFile)) File.Delete(_socketFile);
 
-        var address = new UnixDomainSocketEndPoint(_socketFile);
-        Log.Information($"Unix socket address: {address}.");
+        var address_ = new UnixDomainSocketEndPoint(_socketFile);
+        Log.Information($"Unix socket address: {address_}.");
 
-        using var listener = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
-        listener.Bind(address);
-        listener.Listen();
+        using var listener_ = new Socket(AddressFamily.Unix, SocketType.Stream, ProtocolType.Unspecified);
+        listener_.Bind(address_);
+        listener_.Listen();
 
         while (!stoppingToken.IsCancellationRequested)
         {
             await Task.Delay(0, stoppingToken);
 
             Log.Information("Ready to accept requests...");
-            using var socket = await listener.AcceptAsync(stoppingToken);
-            Log.Information($"Accepted request: {socket}.");
+            using var socket_ = await listener_.AcceptAsync(stoppingToken);
+            Log.Information($"Accepted request: {socket_}.");
 
-            var buffer = new byte[1024];
-            var requestSize = socket.Receive(buffer, 0, buffer.Length, SocketFlags.None);
-            var request = Encoding.UTF8.GetString(buffer, 0, requestSize);
-            Log.Information($"Received: {request}");
+            var buffer_ = new byte[1024];
+            var requestSize_ = socket_.Receive(buffer_, 0, buffer_.Length, SocketFlags.None);
+            var request_ = Encoding.UTF8.GetString(buffer_, 0, requestSize_);
+            Log.Information($"Received: {request_}");
 
-            var lines = request.Split("\n");
-            string path = string.Empty;
-            foreach (var line in lines)
+            var lines_ = request_.Split("\n");
+            string path_ = string.Empty;
+            foreach (var line_ in lines_)
             {
-                if (line.StartsWith("path="))
+                if (line_.StartsWith("path="))
                 {
-                     path = line.Replace("path=", string.Empty);
+                     path_ = line_.Replace("path=", string.Empty);
 
                 }
             }
 
-            string response = string.Empty;
-            if (path.Length != 0)
+            string response_ = string.Empty;
+            if (path_.Length != 0)
             {
-                response = _decorator.Decorate(path);
+                response_ = _decorator.Decorate(path_);
             }
 
-            socket.Send(Encoding.UTF8.GetBytes(response.ToCharArray()));
+            socket_.Send(Encoding.UTF8.GetBytes(response_.ToCharArray()));
 
-            socket.Shutdown(SocketShutdown.Both);
-            socket.Close();
+            socket_.Shutdown(SocketShutdown.Both);
+            socket_.Close();
         }
     }
 }

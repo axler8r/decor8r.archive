@@ -1,0 +1,4 @@
+#! /usr/bin/env zsh
+
+echo $(dotnet run -- decorate terminal --width="${COLUMNS}" --path="${(%):-%~}")
+
