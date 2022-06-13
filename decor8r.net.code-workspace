@@ -22,11 +22,11 @@
         },
         {
             "name": "Inspiration/Oh My Posh",
-            "path": "../../GitHub/microsoft-pwsh-extension-ohmyposh"
+            "path": "../../GitHub/microsoft-pwsh-lib-ohmyposh"
         },
         {
             "name": "Inspiration/Posh Git",
-            "path": "../../GitHub/microsoft-pwsh-extension-poshgit"
+            "path": "../../GitHub/microsoft-pwsh-lib-poshgit"
         },
     ],
     "settings": {
