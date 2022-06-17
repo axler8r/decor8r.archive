@@ -1,13 +1,9 @@
-using Serilog;
-
 using static System.CommandLine.Rendering.Ansi;
 
 namespace DecOR8R.Daemon.Decorators.Terminal;
 
 class TerminalDecorator : IDecorator<string>
 {
-    private static readonly ILogger Log = Serilog.Log.ForContext<TerminalDecorator>();
-
     public string Decorate(string subject)
     {
         if (string.IsNullOrWhiteSpace(subject))
