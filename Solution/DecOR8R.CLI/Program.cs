@@ -3,7 +3,6 @@ namespace DecOR8R.CLI;
 using System;
 using System.Collections.Generic;
 using System.CommandLine;
-using System.CommandLine.Invocation;
 using System.IO;
 using System.Net.Sockets;
 using System.Text;
@@ -49,6 +48,7 @@ internal static class Program
                 new[] {"-p", "--path"},
                 "Path to decorate")
         };
+        /*
         result_.Handler = CommandHandler.Create<int, string>(
             (width, path) =>
             {
@@ -56,6 +56,7 @@ internal static class Program
                 Payload.Add("width", width.ToString());
                 Payload.Add("path", path);
             });
+        */
 
         return result_;
     }
